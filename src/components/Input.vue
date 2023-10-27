@@ -21,15 +21,26 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 
-const props = defineProps({
-  modelValue: { type: String, default: "" },
-  type: { type: String, default: "text" },
-  label: { type: String, default: "Label" },
-  hasRequiredLabel: { type: Boolean, default: false },
-  placeholder: { type: String, default: "Placeholder" },
-  required: { type: Boolean, default: false },
-  pattern: { type: String },
-  disabled: { type: Boolean, default: false },
+interface Props {
+  modelValue:        string;
+  type:              string;
+  label:             string;
+  hasRequiredLabel:  boolean;
+  placeholder:       string;
+  required:          boolean;
+  pattern:           string;
+  disabled:          boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: "",
+  type: "text",
+  label: "Label",
+  hasRequiredLabel: false,
+  placeholder: "Placeholder",
+  required: false,
+  pattern: "",
+  disabled: false,
 });
 </script>
 
