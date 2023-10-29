@@ -45,15 +45,29 @@
 
     <div class="responsive-table__pagination">
       <div class="pagination-buttons">
-        <ButtonActions icon="chevronLeft" disabled />
+        <ButtonActions
+          icon="chevronLeft"
+          :disabled="tablePage === 1"
+          :onClick="() => changePage(tablePage - 1)"
+        />
         <div class="button-numbers">
-          <button class="btn-page btn-page--active">1</button>
-          <button class="btn-page">2</button>
-          <button class="btn-page">3</button>
-          <button class="btn-page" disabled>...</button>
-          <button class="btn-page">10</button>
+          <button
+            v-for="btn in totalButtons"
+            :key="btn"
+            :class="{
+              'btn-page--active': tablePage === btn,
+            }"
+            class="btn-page"
+            @click="changePage(btn)"
+          >
+            {{ btn }}
+          </button>
         </div>
-        <ButtonActions icon="chevronRight" />
+        <ButtonActions
+          icon="chevronRight"
+          :disabled="tablePage === totalButtons"
+          :onClick="() => changePage(tablePage + 1)"
+        />
       </div>
       <div class="responsive-table__totals">
         <p class="text-greyscale-600 text-sm">
@@ -74,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, Ref, reactive } from "vue";
+import { withDefaults, defineProps, ref, reactive } from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
 
 import ButtonActions from "../components/ButtonActions.vue";
@@ -105,14 +119,14 @@ const selectLimit = (limit: number) => {
 };
 
 interface ITotals {
-  from : number;
-  to   : number;
+  from: number;
+  to: number;
   total: number;
 }
 
 const tableTotals = reactive<ITotals>({
-  from : 0,
-  to   : 0,
+  from: 0,
+  to: 0,
   total: 0,
 });
 
@@ -121,6 +135,13 @@ const { tableLimit, tablePage, tableTotal } = globalState;
 tableTotals.from = tableLimit * tablePage - tableLimit + 1;
 tableTotals.to = Math.min(tableLimit * tablePage, tableTotal);
 tableTotals.total = tableTotal;
+
+const totalButtons = ref<number>(0);
+totalButtons.value = Math.ceil(tableTotal / tableLimit) || 0;
+
+const changePage = (page: number) => {
+  globalState.setPage(page);
+};
 </script>
 
 <style lang="postcss" scoped>

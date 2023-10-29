@@ -22,5 +22,10 @@ export const actions = {
 
   setLimit(limit: number) {
     this.tableLimit = limit;
+    this.tablePage = 1;
+  },
+
+  setPage(page: number) {
+    this.tablePage = page;
   },
 };

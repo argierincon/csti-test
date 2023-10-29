@@ -81,10 +81,13 @@ const getEmployeeData = async () => {
   }
 };
 
-const { tableLimit } = storeToRefs(globalState);
+const { tablePage, tableLimit } = storeToRefs(globalState);
 watch(tableLimit, () => {
-  getEmployeeData()
-})
+  getEmployeeData();
+});
+watch(tablePage, () => {
+  getEmployeeData();
+});
 
 onMounted(() => {
   getEmployeeData();
