@@ -99,7 +99,7 @@ const setIconColor = (typeBtn: string) => {
 }
 
 .large {
-  @apply h-14 p-4 text-base;
+  @apply h-12 p-3 lg:h-14 lg:p-4 text-base;
 }
 
 .medium {
