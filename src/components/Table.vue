@@ -57,9 +57,12 @@
       </div>
       <div class="responsive-table__totals">
         <p class="text-greyscale-600 text-sm">
-          Mostrando 1 a 8 de 50 registros
+          Mostrando {{ tableTotals.from }} a {{ tableTotals.to }} de
+          {{ tableTotals.total }} registros
         </p>
         <Select
+          @change="selectLimit"
+          :selected="globalState.tableLimit"
           iconChevronUp
           size="small"
           placeholder="Mostrar 10"
@@ -71,11 +74,12 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from "vue";
+import { withDefaults, defineProps, Ref, reactive } from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
 
 import ButtonActions from "../components/ButtonActions.vue";
 import Select from "../components/Select.vue";
+import { useGlobalStore } from "../store";
 
 const props = defineProps<{ tableData: IEmployee[] }>();
 
@@ -88,11 +92,35 @@ const tableHeaders = [
   "Acciones",
 ];
 
+const globalState = useGlobalStore();
 const optPagination = [
   { label: "Mostrar 10", value: 10 },
   { label: "Mostrar 20", value: 20 },
   { label: "Mostrar 30", value: 30 },
+  { label: "Mostrar 40", value: 40 },
+  { label: "Mostrar 50", value: 50 },
 ];
+const selectLimit = (limit: number) => {
+  globalState.setLimit(limit);
+};
+
+interface ITotals {
+  from : number;
+  to   : number;
+  total: number;
+}
+
+const tableTotals = reactive<ITotals>({
+  from : 0,
+  to   : 0,
+  total: 0,
+});
+
+const { tableLimit, tablePage, tableTotal } = globalState;
+
+tableTotals.from = tableLimit * tablePage - tableLimit + 1;
+tableTotals.to = Math.min(tableLimit * tablePage, tableTotal);
+tableTotals.total = tableTotal;
 </script>
 
 <style lang="postcss" scoped>

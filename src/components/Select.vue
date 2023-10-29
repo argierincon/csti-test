@@ -60,39 +60,23 @@ interface Props {
   required?: boolean;
   options: IOption[];
   iconChevronUp?: boolean;
+  selected?: string | number;
 }
 
-const { modelValue, placeholder } = withDefaults(defineProps<Props>(), {
+const { modelValue, placeholder, selected } = withDefaults(defineProps<Props>(), {
   modelValue: "",
   placeholder: "Placeholder",
   size: "large",
-  options: () => [
-    {
-      label: "label1",
-      value: "value1",
-    },
-    {
-      label: "label2",
-      value: "value2",
-    },
-    {
-      label: "label3",
-      value: "value3",
-    },
-    {
-      label: "label4",
-      value: "value4",
-    },
-  ],
+  selected: ""
 });
 
-const localModel = ref<string>("");
+const localModel = ref<string | number>(selected);
 const emit = defineEmits(["change"]);
 watch(localModel, () => {
-  emit("change", localModel);
+  emit("change", localModel.value);
 });
 
-const isEmpty = computed(() => modelValue === "");
+const isEmpty = computed(() => selected === "");
 </script>
 
 <style lang="postcss" scoped>

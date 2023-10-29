@@ -49,6 +49,7 @@ import TableSkeleton from "../components/TableSkeleton.vue";
 import { useGlobalStore } from "../store/index";
 import { IEmployee } from "../store/interfaces/employee.interface";
 import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
 
 const data = ref<IEmployee[]>([]);
 
@@ -79,6 +80,11 @@ const getEmployeeData = async () => {
     isLoading.value = false;
   }
 };
+
+const { tableLimit } = storeToRefs(globalState);
+watch(tableLimit, () => {
+  getEmployeeData()
+})
 
 onMounted(() => {
   getEmployeeData();

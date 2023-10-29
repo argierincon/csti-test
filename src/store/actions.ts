@@ -19,4 +19,8 @@ export const actions = {
     http.defaults.headers.common.Authorization = `Token ${data.token}`;
     this.dataAuth = { data };
   },
+
+  setLimit(limit: number) {
+    this.tableLimit = limit;
+  },
 };

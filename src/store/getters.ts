@@ -9,4 +9,7 @@ export const getters = {
   employees(state: IState) {
     return state?.dataEmployees?.data;
   },
+  tableTotal(state: IState) {
+    return state?.dataEmployees?.total;
+  },
 };
