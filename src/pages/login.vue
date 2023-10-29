@@ -11,10 +11,12 @@
     <div class="login__form">
       <div class="form">
         <h4>Inicia sesión</h4>
-        <form>
+        <form @submit.prevent="submit" ref="form">
           <Field>
             <Input
+              type="email"
               required
+              pattern="^.+@[^\.].*\.[a-z]{2,}$"
               label="Correo electrónico"
               placeholder="Ingresa el correo electrónico"
               v-model="email"
@@ -32,7 +34,7 @@
 
           <ErrorMsg v-if="formError" class="mt-8" />
 
-          <Button :onClick="login" class="mt-8">Iniciar sesión</Button>
+          <Button type="submit" class="mt-8">Iniciar sesión</Button>
         </form>
         <p class="register">
           ¿Eres nuevo aquí?
@@ -67,12 +69,19 @@ const currentYear = new Date().getFullYear();
 
 const router = useRouter();
 
+// const login = () => {
+//   router.push("/employees");
+// };
+
 const email = ref<string>("");
 const password = ref<string>("");
 const formError = ref<boolean>(false);
 
-const login = () => {
+const submit = () => {
+  console.log("SUBMIT");
   router.push("/employees");
+
+  // form.value.reset();
 };
 </script>
 
