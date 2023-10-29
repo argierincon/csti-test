@@ -1,7 +1,7 @@
 <template>
   <div class="container-view">
     <nav class="nav">
-      <Avatar userName="Christian Quispe" />
+      <Avatar :userName="user?.nombre" />
     </nav>
     <aside class="sidebar">
       <Sidebar />
@@ -15,11 +15,23 @@
 <script setup lang="ts">
 import Sidebar from "../components/Sidebar.vue";
 import Avatar from "../components/Avatar.vue";
+import { useGlobalStore } from "../store/index";
 
-const sidebarItem = [
-  { icon: "🔷", label: "Empleados" },
-  { icon: "💜", label: "Reclutamiento" },
-];
+const globalStore = useGlobalStore();
+const token = globalStore.token;
+let user = globalStore.user;
+
+if (!user && !token) {
+  if (localStorage.getItem("user")) {
+    const localUser = JSON.parse(localStorage.getItem("user"));
+    const localToken = localStorage.getItem("jwt");
+    user = localUser;
+    globalStore.setAuthData({
+      user: localUser,
+      token: localToken,
+    });
+  }
+}
 </script>
 
 <style lang="postcss" scoped>
