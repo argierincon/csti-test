@@ -18,7 +18,13 @@
     </div>
 
     <div v-else class="home__actions">
-      <Input v-model="search" placeholder="Buscar empleado" icon="search" />
+      <Input
+        v-model="search"
+        placeholder="Buscar empleado"
+        icon="search"
+        :onClick="prueba"
+        :isLoading="isLoadingData"
+      />
       <Select
         @change="setRole"
         placeholder="Nombre de cargo"
@@ -26,22 +32,50 @@
       />
     </div>
     <TableSkeleton v-if="isLoading" />
-    <Table v-else />
+    <Table :tableData="data" v-else />
   </section>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref, watch } from "vue";
+
 import Button from "../components/Button.vue";
 import Input from "../components/Input.vue";
 import Table from "../components/Table.vue";
 import Select from "../components/Select.vue";
 import Skeleton from "../components/Skeleton.vue";
 import TableSkeleton from "../components/TableSkeleton.vue";
-import { ref } from "vue";
+
+import { useGlobalStore } from "../store/index";
+import { IEmployee } from "../store/interfaces/employee.interface";
+
+const data = ref<IEmployee[]>([]);
 
 const isLoading = ref<boolean>(false);
+const isLoadingData = ref<boolean>(false);
 const search = ref("");
 const role = ref("");
+
+const globalState = useGlobalStore();
+
+const getEmployeeData = async () => {
+  isLoading.value = true;
+
+  await globalState.getEmployees();
+  data.value = globalState?.employees;
+
+  isLoading.value = false;
+};
+
+onMounted(() => {
+  getEmployeeData();
+});
+
+// watch(data, (newVal: IEmployee) => {
+//   if (!newVal) {
+//     getEmployeeData();
+//   }
+// });
 
 const setRole = (newRole: string) => {
   role.value = newRole;
@@ -53,6 +87,14 @@ const options = [
   { label: "Team Creative", value: "Team Creative" },
   { label: "Team Design", value: "Team Design" },
 ];
+
+const prueba = () => {
+  isLoadingData.value = true;
+  setTimeout(function () {
+    isLoadingData.value = false;
+  }, 500);
+  console.log("prueba");
+};
 </script>
 
 <style lang="postcss" scoped>

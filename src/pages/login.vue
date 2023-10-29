@@ -33,10 +33,12 @@
           </Field>
 
           <transition name="fade-error" mode="out-in">
-            <ErrorMsg v-if="formError" class="mt-8" />
+            <ErrorMsg v-if="formError" :msg="formError" class="mt-8" />
           </transition>
 
-          <Button type="submit" class="mt-8">Iniciar sesión</Button>
+          <Button type="submit" class="mt-8" :loading="isLoading"
+            >Iniciar sesión</Button
+          >
         </form>
         <p class="register">
           ¿Eres nuevo aquí?
@@ -67,22 +69,41 @@ import Icon from "../components/Icon.vue";
 import ErrorMsg from "../components/ErrorMsg.vue";
 import { useRouter } from "vue-router";
 
-const currentYear = new Date().getFullYear();
+import { useGlobalStore } from "../store/index";
 
 const router = useRouter();
+const globalState = useGlobalStore();
 
-// const login = () => {
-//   router.push("/employees");
-// };
+const currentYear = new Date().getFullYear();
+
+const isLoading = ref<boolean>(false);
 
 const email = ref<string>("");
 const password = ref<string>("");
-const formError = ref<boolean>(false);
+const formError = ref<string>("");
 
-const submit = () => {
-  router.push("/employees");
+const submit = async () => {
+  // c.quispe@culqi.com
 
-  // form.value.reset();
+  try {
+    formError.value = "";
+    isLoading.value = true;
+
+    const payload = {
+      correo: email.value,
+      password: password.value,
+    };
+
+    await globalState.login(payload);
+    localStorage.setItem("jwt", globalState.token);
+    localStorage.setItem("user", JSON.stringify(globalState.user));
+
+    router.push("/employees");
+  } catch (error) {
+    formError.value = error.response.data.message;
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
