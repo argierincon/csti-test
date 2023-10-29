@@ -18,8 +18,12 @@
     </div>
 
     <div v-else class="home__actions">
-      <Input placeholder="Buscar empleado" icon="search" />
-      <Select placeholder="Nombre de cargo" :options="options" />
+      <Input v-model="search" placeholder="Buscar empleado" icon="search" />
+      <Select
+        @change="setRole"
+        placeholder="Nombre de cargo"
+        :options="options"
+      />
     </div>
     <TableSkeleton v-if="isLoading" />
     <Table v-else />
@@ -36,12 +40,18 @@ import TableSkeleton from "../components/TableSkeleton.vue";
 import { ref } from "vue";
 
 const isLoading = ref<boolean>(false);
+const search = ref("");
+const role = ref("");
+
+const setRole = (newRole: string) => {
+  role.value = newRole;
+};
 
 // ! TODO recibir la lista de los cargos
 const options = [
-  { label: "Team Product", value: 1 },
-  { label: "Team Creative", value: 2 },
-  { label: "Team Design", value: 3 },
+  { label: "Team Product", value: "Team Product" },
+  { label: "Team Creative", value: "Team Creative" },
+  { label: "Team Design", value: "Team Design" },
 ];
 </script>
 
