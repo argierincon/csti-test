@@ -71,12 +71,6 @@ onMounted(() => {
   getEmployeeData();
 });
 
-// watch(data, (newVal: IEmployee) => {
-//   if (!newVal) {
-//     getEmployeeData();
-//   }
-// });
-
 const setRole = (newRole: string) => {
   role.value = newRole;
 };
