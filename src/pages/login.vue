@@ -80,9 +80,7 @@ const password = ref<string>("");
 const formError = ref<boolean>(false);
 
 const submit = () => {
-  console.log("SUBMIT");
-  formError.value = true;
-  // router.push("/employees");
+  router.push("/employees");
 
   // form.value.reset();
 };
