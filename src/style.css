@@ -2,8 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/* FONT */
+
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-ExtraLight.ttf") format("truetype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-Light.ttf") format("truetype");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "manrope";
+  src: url("./assets/fonts/manrope/Manrope-ExtraBold.ttf") format("truetype");
+  font-weight: 900;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: manrope, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
 
   font-synthesis: none;
