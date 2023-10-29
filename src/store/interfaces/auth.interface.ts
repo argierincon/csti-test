@@ -1,19 +1,24 @@
+export interface IAuthPayload {
+  correo  : string;
+  password: string;
+}
+
 export interface IAuth {
   status: string;
-  data:   IData;
+  data  : IData;
 }
 
 export interface IData {
   token: string;
-  user:  IUser;
+  user : IUser;
 }
 
 export interface IUser {
-  id:           number;
-  nombre:       string;
-  correo:       string;
-  cargo:        string;
+  id          : number;
+  nombre      : string;
+  correo      : string;
+  cargo       : string;
   departamento: string;
-  oficina:      string;
+  oficina     : string;
   estadoCuenta: string;
 }
