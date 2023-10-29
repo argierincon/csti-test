@@ -25,10 +25,7 @@
             >
               <div>
                 <p>{{ value }}</p>
-                <p
-                  v-if="name === 'nombre'"
-                  class="mini-label text text-greyscale-500 text-xs"
-                >
+                <p v-if="name === 'nombre'" class="mini-label">
                   {{ employee.correo }}
                 </p>
               </div>
@@ -46,21 +43,15 @@
       </table>
     </div>
 
-    <div
-      class="responsive-table__pagination mt-6 flex flex-col gap-y-6 lg:flex-row items-center justify-between"
-    >
-      <div class="pagination-buttons flex items-center gap-6">
+    <div class="responsive-table__pagination">
+      <div class="pagination-buttons">
         <ButtonActions icon="chevronLeft" disabled />
-        <div class="button-numbers flex items-center">
-          <button
-            class="page-active bg-greyscale-100 h-8 w-8 text-xs rounded-[10px]"
-          >
-            1
-          </button>
-          <button class="h-8 w-8 text-sm rounded-[10px]">2</button>
-          <button class="h-8 w-8 text-sm rounded-[10px]">3</button>
-          <button class="h-8 w-8 text-sm rounded-[10px]" disabled>...</button>
-          <button class="h-8 w-8 text-sm rounded-[10px]">10</button>
+        <div class="button-numbers">
+          <button class="btn-page btn-page--active">1</button>
+          <button class="btn-page">2</button>
+          <button class="btn-page">3</button>
+          <button class="btn-page" disabled>...</button>
+          <button class="btn-page">10</button>
         </div>
         <ButtonActions icon="chevronRight" />
       </div>
@@ -144,6 +135,29 @@ td[data-label="correo"] {
 
 .table-wrapper {
   @apply overflow-x-auto;
+}
+
+.mini-label {
+  @apply text-greyscale-500 text-xs;
+}
+
+.responsive-table__pagination {
+  @apply mt-6 flex flex-col gap-y-6 lg:flex-row items-center justify-between;
+}
+
+.pagination-buttons {
+  @apply flex items-center gap-6;
+}
+
+.button-numbers {
+  @apply flex items-center text-xs;
+}
+.btn-page {
+  @apply h-8 w-8 rounded-[10px] text-sm;
+}
+
+.btn-page--active {
+  @apply bg-greyscale-100;
 }
 
 .responsive-table__totals {
