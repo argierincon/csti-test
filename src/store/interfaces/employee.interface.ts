@@ -13,8 +13,3 @@ export interface IEmployee {
   oficina:      string;
   estadoCuenta: string;
 }
-
-export enum AccountStatus {
-  Activada = "Activada",
-  Desactivada = "Desactivada",
-}
