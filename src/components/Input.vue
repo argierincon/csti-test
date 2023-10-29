@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { withDefaults, defineProps, ref } from "vue";
 import Icon from "../components/Icon.vue";
 import Spinner from "../components/Spinner.vue";
 

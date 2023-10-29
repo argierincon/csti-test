@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { withDefaults, defineProps, ref } from "vue";
 
 interface Props {
   userName: string;

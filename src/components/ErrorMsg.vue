@@ -6,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps } from "vue";
+
 import Icon from "./Icon.vue";
 
 interface Props {

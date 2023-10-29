@@ -35,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps } from "vue";
+
 import Spinner from "./Spinner.vue";
 import Icon from "./Icon.vue";
 

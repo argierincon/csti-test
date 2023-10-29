@@ -14,15 +14,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { withDefaults, defineProps } from "vue";
 import Spinner from "../components/Spinner.vue";
 
 interface Props {
-  type: "button" | "reset" | "submit",
-  loading: boolean
-  onClick: (payload?: MouseEvent) => void
-  iconRight: string
-  iconLeft: string
+  type: "button" | "reset" | "submit";
+  loading: boolean;
+  onClick: (payload?: MouseEvent) => void;
+  iconRight: string;
+  iconLeft: string;
 }
 
 const props = defineProps<Props>();

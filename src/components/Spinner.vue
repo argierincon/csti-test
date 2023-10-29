@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps } from "vue";
+
 export interface Props {
   color: "black" | "white";
 }
