@@ -13,6 +13,30 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  &::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply rounded-lg;
+    background: #ededed;
+  }
+
+  &::-webkit-scrollbar-track:hover,
+  &::-webkit-scrollbar-track:active {
+    background: #dcdcdc;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-[#a1a1a1];
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#8d8d8d];
+  }
+}
+
 .main-sections {
   @apply p-6 min-h-[50%] max-h-full rounded-2xl bg-white overflow-y-auto;
 }
