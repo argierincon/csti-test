@@ -10,6 +10,8 @@ export default {
         },
         greyscale: {
           50: "#FAFAFA",
+          100: "#F8F8F8",
+          200: "#F1F2F4",
           300: "#E9EAEC",
           500: "#A0AEC0",
           600: "#687588",
@@ -18,7 +20,7 @@ export default {
         success: {
           500: "#0CAF60",
         },
-        danger: {
+        error: {
           500: "#E03137",
         },
         info: {
