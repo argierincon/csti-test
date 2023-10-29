@@ -4,7 +4,7 @@
       >{{ label }}
       <span v-show="required" class="text-error-500">*</span>
     </label>
-    <div class="input" :class="{ 'pr-5 ': isLoading }">
+    <div class="input" :class="{ 'pr-5': isLoading, error: hasError }">
       <input
         v-bind="$attrs"
         v-model="localModel"
@@ -13,6 +13,7 @@
         :required="required"
         :disabled="disabled"
         :pattern="pattern"
+        @invalid="setClassError"
       />
       <button
         v-if="icon && !isLoading"
@@ -50,13 +51,18 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: "",
   type: "text",
   placeholder: "Placeholder",
-  // onClick: () => {
-  //   console.log("holi");
-  // },
-  // isLoading: true,
 });
 
 const localModel = ref<string>("");
+const hasError = ref<boolean>(false);
+
+const setClassError = () => {
+  hasError.value = true;
+
+  setTimeout(function () {
+    hasError.value = false;
+  }, 900);
+};
 </script>
 
 <style lang="postcss" scoped>
@@ -82,11 +88,27 @@ const localModel = ref<string>("");
   &:hover,
   &:focus,
   &:focus-within {
-    @apply !border-success-500;
+    @apply border-success-500;
   }
 
   &:disabled {
     @apply bg-greyscale-50 !border-greyscale-500;
+  }
+
+  &.error:focus-within {
+    @apply border-error-500;
+    position: relative;
+    animation: shake 0.1s linear;
+    animation-iteration-count: 3;
+  }
+
+  @keyframes shake {
+    0% {
+      left: -5px;
+    }
+    100% {
+      right: -5px;
+    }
   }
 }
 
