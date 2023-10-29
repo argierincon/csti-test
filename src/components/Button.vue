@@ -71,6 +71,14 @@ const setIconColor = (typeBtn: string) => {
 <style lang="postcss" scoped>
 .btn {
   @apply w-full flex items-center justify-center gap-x-2 rounded-[10px] font-bold;
+  transition: all 0.3s ease-out;
+
+  &:hover,
+  &:active {
+    transform: scale(1.02);
+    transition: all 0.3s ease-out;
+  }
+
   &:focus {
     @apply outline-none;
   }
