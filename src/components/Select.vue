@@ -135,7 +135,7 @@ const isEmpty = computed(() => modelValue === "");
 
   &.large {
     .select {
-      @apply py-[14px] pl-[20px] rounded-[10px] text-base;
+      @apply py-[14px] pl-[20px] rounded-[10px] text-sm;
     }
   }
 
