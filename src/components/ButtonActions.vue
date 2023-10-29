@@ -45,6 +45,10 @@ const setIconColor = (typeBtn: string, disabled: boolean) => {
   &:hover {
     opacity: 0.75;
     transition: all 0.3s ease-out;
+
+    &:not([disabled]) {
+      transform: scale(1.15);
+    }
   }
 }
 
