@@ -3,8 +3,16 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/login", component: () => import("../pages/login.vue"), meta: { layout: "blank" } },
-    { path: "/employees", component: () => import("../pages/employees.vue"), meta: { layout: "default" } },
+    {
+      path: "/login",
+      component: () => import("../pages/login.vue"),
+      meta: { layout: "blank" },
+    },
+    {
+      path: "/employees",
+      component: () => import("../pages/employees.vue"),
+      meta: { layout: "default" },
+    },
     {
       path: "/recruitment",
       component: () => import("../pages/recruitment.vue"),
@@ -17,19 +25,19 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   const t = localStorage.getItem("accessToken");
-//   if (to.fullPath === "/") {
-//     if (!t) {
-//       next("/login");
-//     }
-//   }
-//   if (to.fullPath === "/login") {
-//     if (t) {
-//       next("/");
-//     }
-//   }
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("jwt");
+  if (to.fullPath !== "/login") {
+    if (!token) {
+      next("/login");
+    }
+  }
+  if (to.fullPath === "/login") {
+    if (token) {
+      next("/employees");
+    }
+  }
+  next();
+});
 
 export default router;
