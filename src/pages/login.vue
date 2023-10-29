@@ -10,28 +10,31 @@
     </div>
     <div class="login__form">
       <div class="form">
-        <h4 class="mb-8 text-2xl text-center font-bold text-greyscale-900">
-          Inicia sesión
-        </h4>
+        <h4>Inicia sesión</h4>
         <form>
-          <Input
-            hasRequiredLabel
-            label="Correo electrónico"
-            placeholder="Ingresa el correo electrónico"
-            v-model="email"
-          />
-          <Input
-            hasRequiredLabel
-            type="password"
-            label="Contraseña"
-            placeholder="Ingresa la contraseña"
-            v-model="password"
-          />
+          <Field>
+            <Input
+              required
+              label="Correo electrónico"
+              placeholder="Ingresa el correo electrónico"
+              v-model="email"
+            />
+          </Field>
+          <Field>
+            <Input
+              required
+              type="password"
+              label="Contraseña"
+              placeholder="Ingresa la contraseña"
+              v-model="password"
+            />
+          </Field>
 
-          <InfoMsg msg="Correo o contraseña incorrectos" />
-          <Button>Iniciar sesión</Button>
+          <ErrorMsg v-if="formError" class="mt-8" />
+
+          <Button :onClick="login" class="mt-8">Iniciar sesión</Button>
         </form>
-        <p class="mt-8 text-center text-sm font-medium text-greyscale-500">
+        <p class="register">
           ¿Eres nuevo aquí?
           <a
             class="text-primary-500"
@@ -43,7 +46,9 @@
         </p>
       </div>
 
-      <p class="copyright">© 2023 Culqi . Todos los derechos reservados</p>
+      <p class="copyright">
+        © {{ currentYear }} Culqi . Todos los derechos reservados
+      </p>
     </div>
   </section>
 </template>
@@ -51,12 +56,24 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import CulqiLogo from "../components/CulqiLogo.vue";
+import Field from "../components/Field.vue";
 import Input from "../components/Input.vue";
-import Button from "../components/MainBtn.vue";
-import InfoMsg from "../components/InfoMsg.vue";
+import Button from "../components/Button.vue";
+import Icon from "../components/Icon.vue";
+import ErrorMsg from "../components/ErrorMsg.vue";
+import { useRouter } from "vue-router";
 
-const email = ref("");
-const password = ref("");
+const currentYear = new Date().getFullYear();
+
+const router = useRouter();
+
+const email = ref<string>("");
+const password = ref<string>("");
+const formError = ref<boolean>(false);
+
+const login = () => {
+  router.push("/employees");
+};
 </script>
 
 <style lang="postcss" scoped>
@@ -85,7 +102,7 @@ const password = ref("");
   @apply lg:text-white;
 
   & h1 {
-    @apply my-6 text-4xl;
+    @apply my-6 text-4xl font-bold;
     @apply xl:text-5xl;
   }
 }
@@ -98,6 +115,14 @@ const password = ref("");
 .form {
   @apply w-4/5 mx-auto flex flex-col justify-center;
   @apply xl:min-w-[480px] xl:max-w-[480px];
+
+  & h4 {
+    @apply mb-8 text-2xl text-center font-bold text-greyscale-900;
+  }
+}
+
+.register {
+  @apply mt-8 text-center text-sm font-medium text-greyscale-500;
 }
 
 .copyright {
