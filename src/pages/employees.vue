@@ -48,6 +48,7 @@ import TableSkeleton from "../components/TableSkeleton.vue";
 
 import { useGlobalStore } from "../store/index";
 import { IEmployee } from "../store/interfaces/employee.interface";
+import { useRouter } from "vue-router";
 
 const data = ref<IEmployee[]>([]);
 
@@ -57,6 +58,13 @@ const search = ref("");
 const role = ref("");
 
 const globalState = useGlobalStore();
+const router = useRouter();
+
+const logout = () => {
+  localStorage.removeItem("jwt");
+  localStorage.removeItem("user");
+  router.push("/login");
+};
 
 const getEmployeeData = async () => {
   try {
@@ -66,6 +74,7 @@ const getEmployeeData = async () => {
     data.value = globalState?.employees;
   } catch (error) {
     console.error(error);
+    logout();
   } finally {
     isLoading.value = false;
   }
