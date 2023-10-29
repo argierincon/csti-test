@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="employee in 6" :key="employee.id">
+          <tr v-for="employee in 6" :key="employee">
             <td v-for="item in 6" :key="item">
               <Skeleton class="h-5 w-24" />
             </td>
