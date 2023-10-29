@@ -17,14 +17,16 @@
       :color="setIconColor(typeBtn)"
       size="small"
     />
-    <template v-if="loading">
-      <div class="btn__spinner">
-        <Spinner :color="typeBtn !== 'primary' ? 'black' : 'white'" />
-      </div>
-    </template>
-    <template v-else>
-      <slot />
-    </template>
+    <p>
+      <template v-if="loading">
+        <div class="btn__spinner">
+          <Spinner :color="typeBtn !== 'primary' ? 'black' : 'white'" />
+        </div>
+      </template>
+      <template v-else>
+        <slot />
+      </template>
+    </p>
     <Icon
       v-if="iconRight"
       :name="iconRight"
@@ -97,7 +99,7 @@ const setIconColor = (typeBtn: string) => {
 }
 
 .large {
-  @apply p-4 text-base;
+  @apply h-14 p-4 text-base;
 }
 
 .medium {
