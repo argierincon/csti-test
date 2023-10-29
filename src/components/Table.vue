@@ -64,9 +64,7 @@
         </div>
         <ButtonActions icon="chevronRight" />
       </div>
-      <div
-        class="responsivetable__totals flex flex-col gap-4 lg:flex-row lg:items-center"
-      >
+      <div class="responsive-table__totals">
         <p class="text-greyscale-600 text-sm">
           Mostrando 1 a 8 de 50 registros
         </p>
@@ -82,10 +80,13 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps } from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
 
 import ButtonActions from "../components/ButtonActions.vue";
 import Select from "../components/Select.vue";
+
+const props = defineProps<{ tableData: IEmployee[] }>();
 
 const tableHeaders = [
   "Nombre",
@@ -94,99 +95,6 @@ const tableHeaders = [
   "Oficina",
   "Cuenta",
   "Acciones",
-];
-
-const tableData: IEmployee[] = [
-  {
-    id: 2,
-    nombre: "Pristia Candra",
-    correo: "pristia@culqi.com",
-    cargo: "UI UX Designer",
-    departamento: "Team Product",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 3,
-    nombre: "Hanna Baptista",
-    correo: "hanna@culqi.com",
-    cargo: "Graphic Designer",
-    departamento: "Team Product",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 4,
-    nombre: "Miracle Geidt",
-    correo: "miracle@culqi.com",
-    cargo: "Finance",
-    departamento: "Team Finance",
-    oficina: "Culqi Office",
-    estadoCuenta: "Desactivada",
-  },
-  {
-    id: 5,
-    nombre: "Rayna Torff",
-    correo: "rayna@culqi.com",
-    cargo: "Project Manager",
-    departamento: "Team Management",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 6,
-    nombre: "Giana Lipshutz",
-    correo: "giana@culqi.com",
-    cargo: "Creative Director",
-    departamento: "Team Creative",
-    oficina: "Culqi Office",
-    estadoCuenta: "Desactivada",
-  },
-  {
-    id: 7,
-    nombre: "James George",
-    correo: "james@culqi.com",
-    cargo: "Lead Designer",
-    departamento: "Team Design",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 8,
-    nombre: "Jordyn George",
-    correo: "jordyn@culqi.com",
-    cargo: "IT Support",
-    departamento: "Team IT",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 9,
-    nombre: "Skylar Herwitz",
-    correo: "skylar@unbixel.com",
-    cargo: "3D Designer",
-    departamento: "Team Design",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 10,
-    nombre: "Andres Silva",
-    correo: "andres@culqi.com",
-    cargo: "Web Developer",
-    departamento: "Team Development",
-    oficina: "Culqi Office",
-    estadoCuenta: "Activada",
-  },
-  {
-    id: 11,
-    nombre: "Ana Maria",
-    correo: "ana@culqi.com",
-    cargo: "Data Scientist",
-    departamento: "Team Data",
-    oficina: "Culqi Office",
-    estadoCuenta: "Desactivada",
-  },
 ];
 
 const optPagination = [
@@ -236,6 +144,10 @@ td[data-label="correo"] {
 
 .table-wrapper {
   @apply overflow-x-auto;
+}
+
+.responsive-table__totals {
+  @apply flex flex-col gap-4 lg:flex-row lg:items-center;
 }
 
 @media screen and (max-width: 768px) {
