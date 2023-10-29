@@ -59,12 +59,16 @@ const role = ref("");
 const globalState = useGlobalStore();
 
 const getEmployeeData = async () => {
-  isLoading.value = true;
+  try {
+    isLoading.value = true;
 
-  await globalState.getEmployees();
-  data.value = globalState?.employees;
-
-  isLoading.value = false;
+    await globalState.getEmployees();
+    data.value = globalState?.employees;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 onMounted(() => {
