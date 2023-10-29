@@ -12,7 +12,7 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 
-const defaultLayout = "default";
+const defaultLayout = "blank";
 
 const layout = computed(() => (route.meta.layout || defaultLayout) + "-layout");
 </script>
