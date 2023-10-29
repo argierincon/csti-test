@@ -13,7 +13,6 @@
         :required="required"
         :disabled="disabled"
         :pattern="pattern"
-        @input="$emit('update:localModel', $event.target.value)"
       />
       <button
         v-if="icon && !isLoading"
@@ -29,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import Icon from "../components/Icon.vue";
 import Spinner from "../components/Spinner.vue";
 
@@ -37,7 +37,7 @@ interface Props {
   type?: string;
   label?: string;
   icon?: string;
-  onClick?: Function;
+  onClick?: (payload?: MouseEvent) => void;
   isLoading?: boolean;
   hasRequiredLabel?: boolean;
   placeholder?: string;
@@ -55,6 +55,8 @@ const props = withDefaults(defineProps<Props>(), {
   // },
   // isLoading: true,
 });
+
+const localModel = ref<string>("");
 </script>
 
 <style lang="postcss" scoped>

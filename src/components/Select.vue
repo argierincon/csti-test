@@ -22,8 +22,6 @@
         }"
         :placeholder="placeholder"
         :required="required"
-        :disabled="disabled"
-        @change="updateValue($event.target.value)"
       >
         <option v-if="localModel === ''" value="" disabled hidden>
           {{ placeholder }}
@@ -38,12 +36,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import {
+  defineEmits,
+  defineProps,
+  computed,
+  ref,
+  watch,
+  withDefaults,
+} from "vue";
 import Icon from "../components/Icon.vue";
 
 interface IOption {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface Props {
@@ -82,13 +87,10 @@ const { modelValue, placeholder } = withDefaults(defineProps<Props>(), {
 });
 
 const localModel = ref<string>("");
-
-const emit = defineEmits(["update:modelValue", "change"]);
-
-function updateValue(value: string) {
-  emit("update:modelValue", value);
-  emit("change");
-}
+const emit = defineEmits(["change"]);
+watch(localModel, () => {
+  emit("change", localModel);
+});
 
 const isEmpty = computed(() => modelValue === "");
 </script>
