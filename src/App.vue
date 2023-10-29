@@ -1,30 +1,31 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <component :is="layout">
+    <transition name="fade-home" mode="out-in">
+      <router-view />
+    </transition>
+  </component>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
+const defaultLayout = "default";
+
+const layout = computed(() => (route.meta.layout || defaultLayout) + "-layout");
+</script>
+
+<style lang="postcss" scoped>
+.fade-home-enter-from,
+.fade-home-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.fade-home-enter-active,
+.fade-home-enter-to {
+  transition: all 0.3s ease-out;
 }
 </style>
