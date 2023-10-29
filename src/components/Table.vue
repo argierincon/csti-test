@@ -161,23 +161,16 @@ td[data-label="correo"] {
 
   .has-mobile-cards tr {
     @apply max-w-full relative block border;
-  }
-
-  .has-mobile-cards tr {
-    @apply [&:not(:last-child)]:mb-4;
-  }
-
-  .has-mobile-cards tr {
-    @apply [&:not([class*="is-"])]:bg-white;
+    @apply [&:not(:last-child)]:mb-4 [&:not([class*="is-"])]:bg-white;
   }
 
   .has-mobile-cards tr td {
-    @apply w-auto flex items-center justify-between;
-  }
+    @apply w-auto flex gap-4 items-center justify-between;
 
-  .has-mobile-cards tr td:before {
-    @apply font-bold text-left capitalize;
-    content: attr(data-label);
+    &:before {
+      @apply font-bold text-left capitalize;
+      content: attr(data-label);
+    }
   }
 }
 </style>
