@@ -4,7 +4,7 @@
       >{{ label }}
       <span v-show="required" class="text-error-500">*</span>
     </label>
-    <div class="input" :class="{ 'pr-5': isLoading, error: hasError }">
+    <div class="input" :class="{ error: hasError }">
       <input
         v-bind="$attrs"
         v-model="localModel"
@@ -15,15 +15,31 @@
         :pattern="pattern"
         @invalid="setClassError"
       />
-      <button
-        v-if="icon && !isLoading"
-        class="py-3 px-5 cursor-default"
-        :class="{ 'icon-btn': onClick }"
-        @click="onClick"
-      >
-        <Icon :name="icon" size="small" />
-      </button>
-      <Spinner color="black" v-else-if="isLoading" />
+
+      <div class="h-full" v-if="icon && !isLoading">
+        <button
+          v-if="onClick && clearBtn && localModel !== ''"
+          @click="onClearInput"
+          :class="{ 'icon-btn--hover': onClick }"
+          class="icon-btn"
+        >
+          <span>
+            <Icon name="close" size="small" />
+          </span>
+        </button>
+        <button
+          v-else
+          :class="{ 'icon-btn--hover': onClick }"
+          @click="onClick"
+          class="icon-btn"
+        >
+          <Icon :name="icon" size="small" />
+        </button>
+      </div>
+
+      <div v-else-if="isLoading" class="icon-btn flex items-center">
+        <Spinner color="black" />
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +55,7 @@ interface Props {
   label?: string;
   icon?: string;
   onClick?: (payload?: MouseEvent) => void;
+  clearBtn?: boolean;
   isLoading?: boolean;
   hasRequiredLabel?: boolean;
   placeholder?: string;
@@ -51,6 +68,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: "",
   type: "text",
   placeholder: "Placeholder",
+  clearBtn: true,
 });
 
 const localModel = ref<string>("");
@@ -62,6 +80,10 @@ const setClassError = () => {
   setTimeout(function () {
     hasError.value = false;
   }, 900);
+};
+
+const onClearInput = () => {
+  localModel.value = "";
 };
 </script>
 
@@ -125,11 +147,15 @@ const setClassError = () => {
 }
 
 .icon-btn {
-  @apply h-full flex items-center cursor-pointer rounded-[10px];
-  transition: all 0.4s ease-out;
-
-  &:hover {
-    @apply bg-greyscale-100;
+  @apply h-full py-3 px-5 cursor-default;
+  &:focus-visible {
+    @apply outline-none;
   }
+}
+
+.icon-btn--hover {
+  @apply flex items-center cursor-pointer rounded-[10px];
+  transition: all 0.4s ease-out;
+  @apply hover:bg-greyscale-100;
 }
 </style>
