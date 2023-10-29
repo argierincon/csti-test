@@ -1,17 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Login from "../pages/login.vue";
-import Employees from "../pages/employees.vue";
-import Recruitment from "../pages/recruitment.vue";
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/login", component: Login, meta: { layout: "blank" } },
-    { path: "/employees", component: Employees, meta: { layout: "default" } },
+    { path: "/login", component: () => import("../pages/login.vue"), meta: { layout: "blank" } },
+    { path: "/employees", component: () => import("../pages/employees.vue"), meta: { layout: "default" } },
     {
       path: "/recruitment",
-      component: Recruitment,
+      component: () => import("../pages/recruitment.vue"),
       meta: { layout: "default" },
     },
     {
