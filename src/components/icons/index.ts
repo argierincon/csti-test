@@ -13,6 +13,7 @@ import PlusVue from "./Plus.vue";
 import SearchVue from "./Search.vue";
 import TrashVue from "./Trash.vue";
 import UsersVue from "./Users.vue";
+import CloseVue from "./Close.vue";
 
 export const setIcons = (app: App) => {
   app.component("briefcase", BriefcaseVue);
@@ -28,4 +29,5 @@ export const setIcons = (app: App) => {
   app.component("search", SearchVue);
   app.component("trash", TrashVue);
   app.component("users", UsersVue);
+  app.component("close", CloseVue);
 };
