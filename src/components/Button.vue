@@ -39,12 +39,12 @@ import Spinner from "./Spinner.vue";
 import Icon from "./Icon.vue";
 
 interface Props {
-  type?: string;
+  type?: "button" | "reset" | "submit";
   typeBtn?: "primary" | "secondary";
   darkMode?: boolean;
   size?: "large" | "medium" | "small";
   loading?: boolean;
-  onClick: Function;
+  onClick?: (payload: MouseEvent) => void;
   iconRight?: string;
   iconLeft?: string;
 }

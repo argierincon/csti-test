@@ -11,13 +11,14 @@
 </template>
 
 <script setup lang="ts">
+import { defineProps, withDefaults } from "vue";
 import Icon from "./Icon.vue";
 
 interface Props {
   typeBtn?: "default" | "success" | "info" | "error";
   disabled?: boolean;
   icon: string;
-  onClick: Function;
+  onClick?: (payload: MouseEvent) => void;
 }
 
 const props = withDefaults(defineProps<Props>(), {

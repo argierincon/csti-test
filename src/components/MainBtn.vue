@@ -17,16 +17,15 @@
 import { defineProps } from "vue";
 import Spinner from "../components/Spinner.vue";
 
-const props = defineProps({
-  type: { type: String, default: "button" },
-  loading: { type: Boolean, default: false },
-  onClick: {
-    type: Function,
-    required: true,
-  },
-  iconRight: { type: String, default: "" },
-  iconLeft: { type: String, default: "" },
-});
+interface Props {
+  type: "button" | "reset" | "submit",
+  loading: boolean
+  onClick: (payload?: MouseEvent) => void
+  iconRight: string
+  iconLeft: string
+}
+
+const props = defineProps<Props>();
 </script>
 
 <style lang="postcss" scoped>
