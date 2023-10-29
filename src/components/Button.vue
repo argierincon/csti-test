@@ -15,7 +15,7 @@
       v-if="iconLeft"
       :name="iconLeft"
       :color="setIconColor(typeBtn)"
-      size="xSmall"
+      size="small"
     />
     <template v-if="loading">
       <div class="btn__spinner">
@@ -29,7 +29,7 @@
       v-if="iconRight"
       :name="iconRight"
       :color="setIconColor(typeBtn)"
-      size="xSmall"
+      size="small"
     />
   </button>
 </template>
