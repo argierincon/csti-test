@@ -3,7 +3,7 @@
     <div class="home__header">
       <div>
         <h4 class="title">Empleados</h4>
-        <p v-show="!isLoading">Gestiona tus empleados</p>
+        <p v-show="!isLoading" class="text-sm">Gestiona tus empleados</p>
       </div>
       <Skeleton v-if="isLoading" class="h-9 lg:!w-60" />
       <div v-else class="header__buttons">

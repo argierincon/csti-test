@@ -53,7 +53,7 @@ const activePage = (item: IItem) => {
 }
 
 .sidebar__item {
-  @apply py-4 flex gap-3 cursor-pointer font-bold;
+  @apply py-4 flex gap-3 cursor-pointer text-sm font-bold;
 }
 
 .router-link-active .sidebar__item {
