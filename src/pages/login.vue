@@ -32,7 +32,9 @@
             />
           </Field>
 
-          <ErrorMsg v-if="formError" class="mt-8" />
+          <transition name="fade-error" mode="out-in">
+            <ErrorMsg v-if="formError" class="mt-8" />
+          </transition>
 
           <Button type="submit" class="mt-8">Iniciar sesión</Button>
         </form>
@@ -79,7 +81,8 @@ const formError = ref<boolean>(false);
 
 const submit = () => {
   console.log("SUBMIT");
-  router.push("/employees");
+  formError.value = true;
+  // router.push("/employees");
 
   // form.value.reset();
 };
@@ -137,5 +140,17 @@ const submit = () => {
 .copyright {
   @apply text-center text-xs font-medium text-greyscale-500;
   @apply lg:mt-0 lg:text-sm;
+}
+
+/* Transition error msg */
+.fade-error-enter-from,
+.fade-error-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.fade-error-enter-active,
+.fade-error-enter-to {
+  transition: all 0.3s ease-out;
 }
 </style>
