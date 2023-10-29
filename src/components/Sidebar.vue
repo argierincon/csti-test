@@ -26,6 +26,8 @@ import Icon from "../components/Icon.vue";
 const router = useRouter();
 
 const logout = () => {
+  localStorage.removeItem("jwt");
+  localStorage.removeItem("user");
   router.push("/login");
 };
 
