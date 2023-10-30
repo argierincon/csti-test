@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: 'https://fepruebatecnicaculqi-backend-production.up.railway.app',
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
