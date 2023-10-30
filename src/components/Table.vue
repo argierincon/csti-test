@@ -1,6 +1,6 @@
 <template>
   <section class="responsive-table">
-    <div class="table-wrapper has-mobile-cards">
+    <div class="table-wrapper">
       <table class="table">
         <thead>
           <tr>
@@ -241,16 +241,16 @@ td[data-label="correo"] {
     @apply hidden;
   }
 
-  .has-mobile-cards thead tr th {
+  .table-wrapper thead tr th {
     @apply hidden;
   }
 
-  .has-mobile-cards tr {
+  .table-wrapper tr {
     @apply max-w-full relative block border;
     @apply [&:not(:last-child)]:mb-4 [&:not([class*="is-"])]:bg-white;
   }
 
-  .has-mobile-cards tr td {
+  .table-wrapper tr td {
     @apply w-auto flex gap-4 items-center justify-between;
 
     &:before {
