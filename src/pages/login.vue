@@ -98,7 +98,7 @@ const submit = async () => {
 
     router.push("/employees");
   } catch (error) {
-    if (error.response.data.message) {
+    if (error.response?.data?.message) {
       formError.value = error.response.data.message;
     } else {
       formError.value =
