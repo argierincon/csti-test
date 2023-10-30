@@ -7,7 +7,9 @@
       </div>
       <Skeleton v-if="isLoading" class="h-9 lg:!w-60" />
       <div v-else class="header__buttons">
-        <Button typeBtn="secondary" iconLeft="download">Descargar</Button>
+        <Button typeBtn="secondary" iconLeft="download" :onClick="downloadData"
+          >Descargar</Button
+        >
         <Button iconLeft="plus">Nuevo</Button>
       </div>
     </div>
@@ -52,6 +54,7 @@ import { useGlobalStore } from "../store/index";
 import { IEmployee } from "../store/interfaces/employee.interface";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
+import { exportCSVFile } from "../utils/downloadCSV";
 
 const data = ref<IEmployee[]>([]);
 
@@ -125,6 +128,12 @@ const onSelect = (option: string) => {
 const clearSearch = () => {
   searchBox.value = "";
   data.value = globalState?.employees;
+};
+
+// Download data
+
+const downloadData = () => {
+  exportCSVFile(globalState?.employees)
 };
 </script>
 

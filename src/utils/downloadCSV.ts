@@ -1,3 +1,5 @@
+import { IEmployee } from "../store/interfaces/employee.interface";
+
 function convertToCSV(array: any[]) {
   let str = "";
 
@@ -5,7 +7,6 @@ function convertToCSV(array: any[]) {
     let line = "";
     for (const index in array[i]) {
       if (line != "") line += ",";
-
       line += array[i][index];
     }
 
@@ -15,21 +16,22 @@ function convertToCSV(array: any[]) {
   return str;
 }
 
-function exportCSVFile(
-  headers: Elements,
-  items: Elements[],
-  fileTitle: string
-) {
-  if (headers) {
-    items.unshift(headers);
-  }
+const headers: IEmployee = {
+  id: 0,
+  nombre: "Nombre",
+  correo: "Correo",
+  cargo: "Nombre cargo",
+  departamento: "Departamento",
+  oficina: "Oficina",
+  estadoCuenta: "Cuenta",
+};
 
-  // Convert Object to JSON
-  const jsonObject = JSON.stringify(items);
+export function exportCSVFile(items: IEmployee[]) {
+  items.unshift(headers);
 
-  const csv = this.convertToCSV(jsonObject);
+  const csv = convertToCSV(items);
 
-  const exportedFilename = fileTitle + ".csv" || "export.csv";
+  const exportedFilename = "export.csv";
 
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
 
@@ -46,58 +48,3 @@ function exportCSVFile(
     document.body.removeChild(link);
   }
 }
-
-interface Elements {
-  model: string;
-  chargers: string;
-  cases: string;
-  earphones: string;
-  scratched?: string;
-}
-
-const headers: Elements = {
-  model: "Phone Model",
-  chargers: "Chargers",
-  cases: "Cases",
-  earphones: "Earphones",
-};
-
-const itemsNotFormatted: Elements[] = [
-  {
-    model: "Samsung S7",
-    chargers: "55",
-    cases: "56",
-    earphones: "57",
-    scratched: "2",
-  },
-  {
-    model: "Pixel XL",
-    chargers: "77",
-    cases: "78",
-    earphones: "79",
-    scratched: "4",
-  },
-  {
-    model: "iPhone 7",
-    chargers: "88",
-    cases: "89",
-    earphones: "90",
-    scratched: "6",
-  },
-];
-
-const itemsFormatted: any[] = [];
-
-// format the data
-itemsNotFormatted.forEach((item) => {
-  itemsFormatted.push({
-    model: item.model.replace(/,/g, ""), // remove commas to avoid errors,
-    chargers: item.chargers,
-    cases: item.cases,
-    earphones: item.earphones,
-  });
-});
-
-const fileTitle = "empleados"; // or 'my-unique-title'
-
-exportCSVFile(headers, itemsFormatted, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
