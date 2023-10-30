@@ -50,19 +50,24 @@
           :disabled="tablePage === 1"
           :onClick="() => changePage(tablePage - 1)"
         />
-        <div class="button-numbers">
-          <button
-            v-for="btn in totalButtons"
-            :key="btn"
-            :class="{
-              'btn-page--active': tablePage === btn,
-            }"
-            class="btn-page"
-            @click="changePage(btn)"
-          >
-            {{ btn }}
-          </button>
-        </div>
+
+        <nav class="page-navigation">
+          <ul class="button-numbers">
+            <li>
+              <button
+                v-for="btn in totalButtons"
+                :key="btn"
+                :class="{
+                  'btn-page--active': tablePage === btn,
+                }"
+                class="btn-page"
+                @click="changePage(btn)"
+              >
+                {{ btn }}
+              </button>
+            </li>
+          </ul>
+        </nav>
         <ButtonActions
           icon="chevronRight"
           :disabled="tablePage === totalButtons"
@@ -217,6 +222,10 @@ td[data-label="correo"] {
   @apply mt-6 flex flex-col gap-y-6 lg:flex-row items-center justify-between;
 }
 
+.page-navigation {
+  @apply max-w-[160px] overflow-x-auto whitespace-nowrap;
+}
+
 .pagination-buttons {
   @apply flex items-center gap-6;
 }
@@ -224,6 +233,7 @@ td[data-label="correo"] {
 .button-numbers {
   @apply flex items-center text-xs;
 }
+
 .btn-page {
   @apply h-8 w-8 rounded-[10px] text-sm;
 }
