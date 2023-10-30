@@ -83,8 +83,6 @@ const password = ref<string>("");
 const formError = ref<string>("");
 
 const submit = async () => {
-  // c.quispe@culqi.com
-
   try {
     formError.value = "";
     isLoading.value = true;
