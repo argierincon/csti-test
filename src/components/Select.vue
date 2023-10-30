@@ -4,17 +4,11 @@
       >{{ label }}
       <span v-show="hasRequiredLabel" class="text-error-500">*</span>
     </label>
-    <div
-      class="box-select"
-      :class="{
-        large: size === 'large',
-        medium: size === 'medium',
-        small: size === 'small',
-        'chevron-down': !iconChevronUp,
-        'chevron-up': iconChevronUp,
-      }"
-    >
+    <div class="box-select" :class="selectClass">
       <select
+        :class="{
+          'is-empty': isEmpty,
+        }"
         v-model="localModel"
         class="select"
         :placeholder="placeholder"
@@ -40,6 +34,7 @@ import {
   ref,
   watch,
   withDefaults,
+  toRefs,
 } from "vue";
 import Icon from "../components/Icon.vue";
 
@@ -60,21 +55,32 @@ interface Props {
   selected?: string | number;
 }
 
-const { modelValue, placeholder, selected } = withDefaults(
-  defineProps<Props>(),
-  {
-    modelValue: "",
-    placeholder: "Placeholder",
-    size: "large",
-    selected: "",
-  }
-);
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: "",
+  placeholder: "Placeholder",
+  size: "large",
+  selected: "",
+});
 
-const localModel = ref<string | number>(selected);
+const { modelValue, placeholder, size, selected, iconChevronUp } =
+  toRefs(props);
+
+const localModel = ref<string | number>(selected.value);
 const emit = defineEmits(["change"]);
 watch(localModel, () => {
   emit("change", localModel.value);
 });
+
+const isEmpty = computed(() => selected.value === "");
+
+// STYLES
+const selectClass = computed(() => ({
+  large: size.value === "large",
+  medium: size.value === "medium",
+  small: size.value === "small",
+  "chevron-down": !iconChevronUp.value,
+  "chevron-up": iconChevronUp.value,
+}));
 </script>
 
 <style lang="postcss" scoped>
@@ -153,6 +159,11 @@ watch(localModel, () => {
 
   &::-ms-expand {
     @apply hidden;
+  }
+
+  &.is-empty {
+    @apply text-[#b5b5b5];
+    /* color: #b5b5b5; */
   }
 }
 </style>

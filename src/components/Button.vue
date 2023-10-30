@@ -1,16 +1,5 @@
 <template>
-  <button
-    class="btn"
-    :type="type"
-    :class="{
-      primary: typeBtn === 'primary',
-      secondary: typeBtn !== 'primary',
-      large: size === 'large',
-      medium: size === 'medium',
-      small: size === 'small',
-    }"
-    @click="onClick"
-  >
+  <button class="btn" :type="type" :class="btnClass" @click="onClick">
     <Icon
       v-if="iconLeft"
       :name="iconLeft"
@@ -37,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from "vue";
+import { withDefaults, defineProps, toRefs, computed } from "vue";
 
 import Spinner from "./Spinner.vue";
 import Icon from "./Icon.vue";
@@ -59,6 +48,8 @@ const props = withDefaults(defineProps<Props>(), {
   size: "large",
 });
 
+const { type, typeBtn, size } = toRefs(props);
+
 const setIconColor = (typeBtn: string) => {
   switch (typeBtn) {
     case "secondary":
@@ -68,6 +59,16 @@ const setIconColor = (typeBtn: string) => {
       return "white";
   }
 };
+
+// STYLES
+
+const btnClass = computed(() => ({
+  primary: typeBtn.value === "primary",
+  secondary: typeBtn.value !== "primary",
+  large: size.value === "large",
+  medium: size.value === "medium",
+  small: size.value === "small",
+}));
 </script>
 
 <style lang="postcss" scoped>
