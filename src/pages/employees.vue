@@ -68,6 +68,8 @@ const logout = () => {
   router.push("/login");
 };
 
+const defaultOpt = [{ label: "Todos", value: ".*" }];
+
 const options = ref([]);
 const getEmployeeData = async () => {
   role.value = "";
@@ -77,10 +79,12 @@ const getEmployeeData = async () => {
     await globalState.getEmployees();
     data.value = globalState?.employees;
 
-    options.value = globalState?.employees?.map((ele) => ({
-      label: ele.cargo,
-      value: ele.cargo,
-    }));
+    options.value = globalState?.employees
+      ?.map((ele) => ({
+        label: ele.cargo,
+        value: ele.cargo,
+      }))
+      .concat(defaultOpt);
   } catch (error) {
     console.error(error);
     logout();
@@ -103,12 +107,16 @@ onMounted(() => {
 
 const searchBox = ref<string>("");
 const onSearch = () => {
+  console.log("ALGO?");
+
   data.value = globalState?.employees?.filter((ele) => {
     return (
       RegExp(searchBox.value.toLowerCase()).test(ele.nombre.toLowerCase()) ||
       RegExp(searchBox.value.toLowerCase()).test(ele.departamento.toLowerCase())
     );
   });
+
+  console.log(data.value, "ADFDF");
 };
 
 const onSelect = (option: string) => {
