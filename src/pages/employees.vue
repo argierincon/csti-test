@@ -107,16 +107,12 @@ onMounted(() => {
 
 const searchBox = ref<string>("");
 const onSearch = () => {
-  console.log("ALGO?");
-
   data.value = globalState?.employees?.filter((ele) => {
     return (
       RegExp(searchBox.value.toLowerCase()).test(ele.nombre.toLowerCase()) ||
       RegExp(searchBox.value.toLowerCase()).test(ele.departamento.toLowerCase())
     );
   });
-
-  console.log(data.value, "ADFDF");
 };
 
 const onSelect = (option: string) => {
@@ -124,7 +120,6 @@ const onSelect = (option: string) => {
   data.value = globalState?.employees?.filter((ele) => {
     return RegExp(option.toLowerCase()).test(ele.cargo.toLowerCase());
   });
-  console.log(role.value);
 };
 
 const clearSearch = () => {
