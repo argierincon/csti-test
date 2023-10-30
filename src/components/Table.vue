@@ -88,7 +88,14 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, reactive, toRefs } from "vue";
+import {
+  withDefaults,
+  defineProps,
+  ref,
+  reactive,
+  toRefs,
+  computed,
+} from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
 
 import ButtonActions from "../components/ButtonActions.vue";
@@ -99,10 +106,8 @@ const props = defineProps<{ tableData: IEmployee[] }>();
 
 const { tableData } = toRefs(props);
 
-const cleanData = ref(null);
-
-const formattingData = () => {
-  cleanData.value = tableData.value.map((e) => {
+const cleanData = computed(() => {
+  return tableData.value.map((e) => {
     return {
       id: e.id,
       nombre: e.nombre,
@@ -113,9 +118,7 @@ const formattingData = () => {
       cuenta: e.estadoCuenta,
     };
   });
-};
-
-formattingData();
+});
 
 const tableHeaders = [
   "Nombre",
