@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="employee in tableData" :key="employee.id">
+          <tr v-for="employee in cleanData" :key="employee.id">
             <td
               v-for="(value, name) in employee"
               :key="name"
@@ -88,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, reactive } from "vue";
+import { withDefaults, defineProps, ref, reactive, toRefs } from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
 
 import ButtonActions from "../components/ButtonActions.vue";
@@ -96,6 +96,26 @@ import Select from "../components/Select.vue";
 import { useGlobalStore } from "../store";
 
 const props = defineProps<{ tableData: IEmployee[] }>();
+
+const { tableData } = toRefs(props);
+
+const cleanData = ref(null);
+
+const formattingData = () => {
+  cleanData.value = tableData.value.map((e) => {
+    return {
+      id: e.id,
+      nombre: e.nombre,
+      correo: e.correo,
+      cargo: e.cargo,
+      departamento: e.departamento,
+      oficina: e.oficina,
+      cuenta: e.estadoCuenta,
+    };
+  });
+};
+
+formattingData();
 
 const tableHeaders = [
   "Nombre",
