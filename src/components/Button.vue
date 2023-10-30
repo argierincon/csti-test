@@ -9,7 +9,7 @@
     <p>
       <template v-if="loading">
         <div class="btn__spinner">
-          <Spinner :color="typeBtn !== 'primary' ? 'black' : 'white'" />
+          <Spinner :color="spinnerColor" />
         </div>
       </template>
       <template v-else>
@@ -61,6 +61,9 @@ const setIconColor = (typeBtn: string) => {
 };
 
 // STYLES
+const spinnerColor = computed(() =>
+  typeBtn.value !== "primary" ? "black" : "white"
+);
 
 const btnClass = computed(() => ({
   primary: typeBtn.value === "primary",
