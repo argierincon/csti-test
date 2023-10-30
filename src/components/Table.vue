@@ -228,6 +228,10 @@ td[data-label="correo"] {
 .page-navigation {
   @apply max-w-[100px] overflow-x-auto whitespace-nowrap;
   @apply md:max-w-none;
+
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
 }
 
 .pagination-buttons {
