@@ -62,6 +62,7 @@
                 }"
                 class="btn-page"
                 @click="changePage(btn)"
+                :disabled="typeof btn === 'string'"
               >
                 {{ btn }}
               </button>
