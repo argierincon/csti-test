@@ -17,9 +17,6 @@
       <select
         v-model="localModel"
         class="select"
-        :class="{
-          'is-empty': isEmpty,
-        }"
         :placeholder="placeholder"
         :required="required"
       >
@@ -63,20 +60,21 @@ interface Props {
   selected?: string | number;
 }
 
-const { modelValue, placeholder, selected } = withDefaults(defineProps<Props>(), {
-  modelValue: "",
-  placeholder: "Placeholder",
-  size: "large",
-  selected: ""
-});
+const { modelValue, placeholder, selected } = withDefaults(
+  defineProps<Props>(),
+  {
+    modelValue: "",
+    placeholder: "Placeholder",
+    size: "large",
+    selected: "",
+  }
+);
 
 const localModel = ref<string | number>(selected);
 const emit = defineEmits(["change"]);
 watch(localModel, () => {
   emit("change", localModel.value);
 });
-
-const isEmpty = computed(() => selected === "");
 </script>
 
 <style lang="postcss" scoped>
@@ -154,10 +152,6 @@ const isEmpty = computed(() => selected === "");
 
   &::-ms-expand {
     @apply hidden;
-  }
-
-  &.is-empty {
-    color: #b5b5b5;
   }
 }
 </style>

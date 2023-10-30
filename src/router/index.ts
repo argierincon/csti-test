@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
-  history: createWebHistory('csti-test'),
+  history: createWebHistory('/csti-test'),
   routes: [
     {
       path: "/login",

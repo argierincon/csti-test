@@ -19,14 +19,16 @@
 
     <div v-else class="home__actions">
       <Input
-        v-model="search"
+        v-model="searchBox"
         placeholder="Buscar empleado"
         icon="search"
-        :onClick="prueba"
+        :onInput="onSearch"
         :isLoading="isLoadingData"
+        :clearInput="clearSearch"
       />
       <Select
-        @change="setRole"
+        @change="onSelect"
+        :selected="role"
         placeholder="Nombre de cargo"
         :options="options"
       />
@@ -55,8 +57,7 @@ const data = ref<IEmployee[]>([]);
 
 const isLoading = ref<boolean>(false);
 const isLoadingData = ref<boolean>(false);
-const search = ref("");
-const role = ref("");
+const role = ref<string>("");
 
 const globalState = useGlobalStore();
 const router = useRouter();
@@ -67,12 +68,19 @@ const logout = () => {
   router.push("/login");
 };
 
+const options = ref([]);
 const getEmployeeData = async () => {
+  role.value = "";
   try {
     isLoading.value = true;
 
     await globalState.getEmployees();
     data.value = globalState?.employees;
+
+    options.value = globalState?.employees?.map((ele) => ({
+      label: ele.cargo,
+      value: ele.cargo,
+    }));
   } catch (error) {
     console.error(error);
     logout();
@@ -93,23 +101,27 @@ onMounted(() => {
   getEmployeeData();
 });
 
-const setRole = (newRole: string) => {
-  role.value = newRole;
+const searchBox = ref<string>("");
+const onSearch = () => {
+  data.value = globalState?.employees?.filter((ele) => {
+    return (
+      RegExp(searchBox.value.toLowerCase()).test(ele.nombre.toLowerCase()) ||
+      RegExp(searchBox.value.toLowerCase()).test(ele.departamento.toLowerCase())
+    );
+  });
 };
 
-// ! TODO recibir la lista de los cargos
-const options = [
-  { label: "Team Product", value: "Team Product" },
-  { label: "Team Creative", value: "Team Creative" },
-  { label: "Team Design", value: "Team Design" },
-];
+const onSelect = (option: string) => {
+  role.value = option;
+  data.value = globalState?.employees?.filter((ele) => {
+    return RegExp(option.toLowerCase()).test(ele.cargo.toLowerCase());
+  });
+  console.log(role.value);
+};
 
-const prueba = () => {
-  isLoadingData.value = true;
-  setTimeout(function () {
-    isLoadingData.value = false;
-  }, 500);
-  console.log("prueba");
+const clearSearch = () => {
+  searchBox.value = "";
+  data.value = globalState?.employees;
 };
 </script>
 

@@ -5,7 +5,6 @@ import { IEmpleados } from "./interfaces/employee.interface";
 export const actions = {
   async login(payload: IAuthPayload) {
     const { data } = await http.post<IAuth>("/auth/login", payload);
-    console.log(data);
     http.defaults.headers.common.Authorization = `Token ${data.data.token}`;
     this.dataAuth = data;
   },

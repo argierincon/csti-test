@@ -14,25 +14,21 @@
         :disabled="disabled"
         :pattern="pattern"
         @invalid="setClassError"
+        @input="onInput"
       />
 
       <div class="h-full" v-if="icon && !isLoading">
         <button
-          v-if="onClick && clearBtn && localModel !== ''"
-          @click="onClearInput"
-          :class="{ 'icon-btn--hover': onClick }"
-          class="icon-btn"
+          v-if="clearInput && localModel !== ''"
+          @click="clearInput"
+          class="icon-btn !cursor-pointer"
         >
           <span>
             <Icon name="close" size="small" />
           </span>
         </button>
-        <button
-          v-else
-          :class="{ 'icon-btn--hover': onClick }"
-          @click="onClick"
-          class="icon-btn"
-        >
+
+        <button v-else class="icon-btn">
           <Icon :name="icon" size="small" />
         </button>
       </div>
@@ -54,8 +50,8 @@ interface Props {
   type?: string;
   label?: string;
   icon?: string;
-  onClick?: (payload?: MouseEvent) => void;
-  clearBtn?: boolean;
+  onInput?: (payload: Event) => void;
+  clearInput?: (payload: MouseEvent) => void;
   isLoading?: boolean;
   hasRequiredLabel?: boolean;
   placeholder?: string;
@@ -68,7 +64,6 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: "",
   type: "text",
   placeholder: "Placeholder",
-  clearBtn: true,
 });
 
 const localModel = ref<string>("");
@@ -80,10 +75,6 @@ const setClassError = () => {
   setTimeout(function () {
     hasError.value = false;
   }, 900);
-};
-
-const onClearInput = () => {
-  localModel.value = "";
 };
 </script>
 
@@ -148,14 +139,15 @@ const onClearInput = () => {
 
 .icon-btn {
   @apply h-full py-3 px-5 cursor-default;
+  transition: all 0.4s ease-out;
+
   &:focus-visible {
     @apply outline-none;
   }
 }
 
-.icon-btn--hover {
+/* .icon-btn--hover {
   @apply flex items-center cursor-pointer rounded-[10px];
-  transition: all 0.4s ease-out;
   @apply hover:bg-greyscale-100;
-}
+} */
 </style>
