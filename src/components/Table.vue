@@ -60,6 +60,7 @@
                 :class="{
                   'btn-page--active': tablePage === btn,
                 }"
+                :disabled="typeof btn === 'string'"
                 class="btn-page"
                 @click="changePage(btn)"
               >
@@ -106,6 +107,7 @@ import { IEmployee } from "../store/interfaces/employee.interface";
 import ButtonActions from "../components/ButtonActions.vue";
 import Select from "../components/Select.vue";
 import { useGlobalStore } from "../store";
+import { getPaginationRange } from "../utils/paginationDots";
 
 const props = defineProps<{ tableData: IEmployee[] }>();
 
@@ -164,8 +166,9 @@ tableTotals.from = tableLimit * tablePage - tableLimit + 1;
 tableTotals.to = Math.min(tableLimit * tablePage, tableTotal);
 tableTotals.total = tableTotal;
 
-const totalButtons = ref<number>(0);
-totalButtons.value = Math.ceil(tableTotal / tableLimit) || 0;
+const totalButtons = ref<(number | string)[]>();
+const totalPageCount = Math.ceil(tableTotal / tableLimit) || 0;
+totalButtons.value = getPaginationRange(totalPageCount, globalState.tablePage);
 
 const changePage = (page: number) => {
   globalState.setPage(page);
@@ -223,7 +226,8 @@ td[data-label="correo"] {
 }
 
 .page-navigation {
-  @apply max-w-[160px] overflow-x-auto whitespace-nowrap;
+  @apply max-w-[100px] overflow-x-auto whitespace-nowrap;
+  @apply md:max-w-none;
 }
 
 .pagination-buttons {
