@@ -25,7 +25,7 @@ Culqi han creado un sistema de gestión de personal para las empresas que tienen
 
 - Almacenamiento de datos de Usuario: al iniciar sesión, los datos del usuario se almacenan de manera segura en el sistema. Esto habilita un acceso rápido a la información del usuario autenticado, a su vez permite que las iniciales del usuario se muestren en el componente Header del layout de la página principal, \_el color de fondo de las iniciales es un color aleatorio calculado automáticamente con una función utilitaria.
 
-#### Lista de usuarios
+#### Lista de empleado
 
 - Componente tabla responsive con paginación: se ha creado un componente tabla adaptable que muestra de manera eficiente los datos de los empleados en diferentes tamaños de pantalla, garantizando una experiencia de usuario consistente.
 
@@ -33,8 +33,13 @@ Culqi han creado un sistema de gestión de personal para las empresas que tienen
 
 - Control de la cantidad de empleados a mostrar: Los usuarios pueden seleccionar la cantidad de empleados que desean visualizar a la vez mediante opciones de selección.
 
-- Búsqueda: se aplicó una función de búsqueda para encontrar a empleados específicos utilizando parámetros de nombre y departamento.
+- Búsqueda: se aplicó una función de búsqueda en la página actual para encontrar a empleados específicos utilizando parámetros de nombre y departamento.
 
-- Filtrado por Cargo: se ha incorporado un componente select de filtrado basado en el nombre del cargo de los empleados.
+- Filtrado por Cargo: se ha incorporado un componente select de filtrado en la página actual basado en el nombre del cargo de los empleados.
 
-- Descarga de la lista de empleado: se añadió una función utilitaria que permite la lista de empleados que se muestra en un momento determinado.
+- Descarga de la lista de empleado: se añadió una función utilitaria que permite descargar la lista de empleados visible en la página actual.
+
+
+#### Página de reclutamiento
+
+- El diseño de la página de reclutamiento no fue indicado, por lo que se construyó un placeholder con el fin de no dejar la página vacía ni el enlace sin funcionamiento.
