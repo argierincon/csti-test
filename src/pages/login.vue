@@ -102,7 +102,7 @@ const submit = async () => {
       formError.value = error.response.data.message;
     } else {
       formError.value =
-        "Ha ocurrido un error inesperado, por favor intente nuevamente";
+        "Ha ocurrido un error inesperado, por favor intente nuevamente.";
     }
   } finally {
     isLoading.value = false;
