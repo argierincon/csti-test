@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from "vue";
+import { withDefaults, defineProps, ref, watch, toRefs } from "vue";
 import Icon from "../components/Icon.vue";
 import Spinner from "../components/Spinner.vue";
 
@@ -69,6 +69,14 @@ const props = withDefaults(defineProps<Props>(), {
 const localModel = ref<string>("");
 const hasError = ref<boolean>(false);
 
+const emit = defineEmits(["clearInput"]);
+
+const { modelValue } = toRefs(props);
+
+watch(modelValue, (newVal) => {
+  localModel.value = newVal;
+});
+
 const setClassError = () => {
   hasError.value = true;
 
@@ -94,7 +102,8 @@ const setClassError = () => {
   transition: all 0.3s ease;
 
   & input {
-    @apply w-full py-4 px-5 outline-none bg-transparent;
+    @apply w-full h-[46px] py-4 px-5 outline-none bg-transparent;
+    @apply lg:h-14;
   }
 
   &:active,
@@ -145,9 +154,4 @@ const setClassError = () => {
     @apply outline-none;
   }
 }
-
-/* .icon-btn--hover {
-  @apply flex items-center cursor-pointer rounded-[10px];
-  @apply hover:bg-greyscale-100;
-} */
 </style>

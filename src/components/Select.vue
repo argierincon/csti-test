@@ -117,7 +117,8 @@ watch(localModel, () => {
 
   &.large {
     .select {
-      @apply py-[14px] pl-[20px] rounded-[10px] text-sm;
+      @apply h-12 py-[14px] pl-[20px] rounded-[10px] text-sm;
+      @apply lg:h-14;
     }
   }
 
