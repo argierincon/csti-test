@@ -3,6 +3,6 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/csti-test/",
+  base: "https://argierincon.github.io/csti-test",
   plugins: [vue()],
 })
