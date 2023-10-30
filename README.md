@@ -1,18 +1,40 @@
-# Vue 3 + TypeScript + Vite
+# Prueba técnica FE Culqi
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- [Descripción](#características)
+- [Características](#características)
+<!-- - [Capturas de Pantalla](#capturas-de-pantalla)
+- [Proceso de desarrollo](#capturas-de-pantalla) -->
 
-## Recommended IDE Setup
+## Descripción
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Culqi han creado un sistema de gestión de personal para las empresas que tienen como cliente. Este sistema está diseñado para satisfacer sus necesidades fundamentales y se compone de dos funcionalidades esenciales:
 
-## Type Support For `.vue` Imports in TS
+**Autenticación:** Brindar un sólido sistema de autenticación que garantiza la seguridad y la privacidad de los datos de la empresa.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+**Listado de Empleados:** La plataforma proporciona una herramienta eficiente para gestionar empleados, facilitando el control y la organización de la fuerza laboral de las empresas.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Características
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+#### Login
+
+- Validación de Campos inválidos y vacíos: se ha implementado la validación de formularios de campos requeridos y un regEx para validar el formato del correo ingresado.
+
+- Manejo de errores en caso de fallos en el Formulario: se ha implementado una validación en las peticiones del formulario para mostrar el debido mensaje de error en caso de cualquier fallo en el proceso de inicio de sesión.
+
+- Redirección a la página principal: después de una autenticación exitosa, se aplica la redirección automática para llevar al usuario a la página principal de la plataforma y en caso de navegación directamente por las rutas o vencimiento del token la pagina redirige al usuario al login.
+
+- Almacenamiento de datos de Usuario: al iniciar sesión, los datos del usuario se almacenan de manera segura en el sistema. Esto habilita un acceso rápido a la información del usuario autenticado, a su vez permite que las iniciales del usuario se muestren en el componente Header del layout de la página principal, \_el color de fondo de las iniciales es un color aleatorio calculado automáticamente con una función utilitaria.
+
+#### Lista de usuarios
+
+- Componente tabla responsive con paginación: se ha creado un componente tabla adaptable que muestra de manera eficiente los datos de los empleados en diferentes tamaños de pantalla, garantizando una experiencia de usuario consistente.
+
+- Navegación y paginación: se desarrolló la funcionalidad de navegación entre páginas para facilitar la visualización de la lista de empleados.
+
+- Control de la cantidad de empleados a mostrar: Los usuarios pueden seleccionar la cantidad de empleados que desean visualizar a la vez mediante opciones de selección.
+
+- Búsqueda: se aplicó una función de búsqueda para encontrar a empleados específicos utilizando parámetros de nombre y departamento.
+
+- Filtrado por Cargo: se ha incorporado un componente select de filtrado basado en el nombre del cargo de los empleados.
+
+- Descarga de la lista de empleado: se añadió una función utilitaria que permite la lista de empleados que se muestra en un momento determinado.
