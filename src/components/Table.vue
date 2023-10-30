@@ -60,7 +60,6 @@
                 :class="{
                   'btn-page--active': tablePage === btn,
                 }"
-                :disabled="typeof btn === 'string'"
                 class="btn-page"
                 @click="changePage(btn)"
               >
@@ -71,7 +70,7 @@
         </nav>
         <ButtonActions
           icon="chevronRight"
-          :disabled="tablePage === totalButtons"
+          :disabled="tablePage === totalButtons.length"
           :onClick="() => changePage(tablePage + 1)"
         />
       </div>
@@ -170,7 +169,10 @@ const totalButtons = ref<(number | string)[]>();
 const totalPageCount = Math.ceil(tableTotal / tableLimit) || 0;
 totalButtons.value = getPaginationRange(totalPageCount, globalState.tablePage);
 
-const changePage = (page: number) => {
+const changePage = (page: number | string) => {
+  if (typeof page === "string") {
+    return;
+  }
   globalState.setPage(page);
 };
 </script>
