@@ -49,6 +49,7 @@ interface Props {
   size?: "large" | "medium" | "small";
   hasRequiredLabel?: boolean;
   placeholder?: string;
+  hasEmptyValue?: boolean;
   required?: boolean;
   options: IOption[];
   iconChevronUp?: boolean;
@@ -60,10 +61,17 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: "Placeholder",
   size: "large",
   selected: "",
+  hasEmptyValue: false,
 });
 
-const { modelValue, placeholder, size, selected, iconChevronUp } =
-  toRefs(props);
+const {
+  modelValue,
+  placeholder,
+  size,
+  selected,
+  iconChevronUp,
+  hasEmptyValue,
+} = toRefs(props);
 
 const localModel = ref<string | number>(selected.value);
 const emit = defineEmits(["change"]);
@@ -71,9 +79,14 @@ watch(localModel, () => {
   emit("change", localModel.value);
 });
 
-const isEmpty = computed(() => selected.value === "");
-
 // STYLES
+
+const isEmpty = ref<boolean>(false);
+
+if (hasEmptyValue.value) {
+  isEmpty.value = selected.value === "";
+}
+
 const selectClass = computed(() => ({
   large: size.value === "large",
   medium: size.value === "medium",
