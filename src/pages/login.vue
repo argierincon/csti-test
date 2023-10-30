@@ -98,7 +98,12 @@ const submit = async () => {
 
     router.push("/employees");
   } catch (error) {
-    formError.value = error.response.data.message;
+    if (error.response.data.message) {
+      formError.value = error.response.data.message;
+    } else {
+      formError.value =
+        "Ha ocurrido un error inesperado, por favor intente nuevamente";
+    }
   } finally {
     isLoading.value = false;
   }
