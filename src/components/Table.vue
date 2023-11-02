@@ -23,7 +23,7 @@
               :key="name"
               :data-label="name"
             >
-              <div>
+              <div class="data-cell">
                 <p>{{ value }}</p>
                 <p v-if="name === 'nombre'" class="mini-label">
                   {{ employee.correo }}
@@ -273,6 +273,10 @@ td[data-label="correo"] {
 
   .table-wrapper tr td {
     @apply w-auto flex gap-4 items-center justify-between;
+
+    .data-cell {
+      @apply flex flex-col items-end text-end;
+    }
 
     &:before {
       @apply font-bold text-left capitalize;
