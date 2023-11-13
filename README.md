@@ -5,6 +5,10 @@
 <!-- - [Capturas de Pantalla](#capturas-de-pantalla)
 - [Proceso de desarrollo](#capturas-de-pantalla) -->
 
+*Credenciales para probar el sistema:*
+Usuario: c.quispe@culqi.com
+Password: admin123
+
 ## Descripción
 
 Culqi han creado un sistema de gestión de personal para las empresas que tienen como cliente. Este sistema está diseñado para satisfacer sus necesidades fundamentales y se compone de dos funcionalidades esenciales:
