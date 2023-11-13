@@ -1,4 +1,4 @@
-# Prueba técnica FE Culqi
+# Prueba técnica FE
 
 - [Descripción](#características)
 - [Características](#características)
