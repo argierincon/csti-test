@@ -5,7 +5,7 @@
 <!-- - [Capturas de Pantalla](#capturas-de-pantalla)
 - [Proceso de desarrollo](#capturas-de-pantalla) -->
 
-*Credenciales para probar el sistema:*
+####Credenciales para probar el sistema:
 Usuario: c.quispe@culqi.com
 Password: admin123
 
