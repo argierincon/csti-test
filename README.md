@@ -7,6 +7,7 @@
 
 #### Credenciales para probar el sistema:
 **Usuario:** c.quispe@culqi.com
+
 **Password:** admin123
 
 ## Descripción
