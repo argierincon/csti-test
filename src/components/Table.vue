@@ -71,7 +71,7 @@
         </nav>
         <ButtonActions
           icon="chevronRight"
-          :disabled="tablePage === totalButtons.length"
+          :disabled="tablePage === totalButtons.length - 1"
           :onClick="() => changePage(tablePage + 1)"
         />
       </div>
@@ -102,9 +102,16 @@ import Select from "../components/Select.vue";
 import { useGlobalStore } from "../store";
 import { getPaginationRange } from "../utils/paginationDots";
 
-const props = defineProps<{ tableData: IEmployee[] }>();
+interface IProps {
+  tableData: IEmployee[];
+  tableLimit: number;
+  tablePage: number;
+  tableTotal: number;
+}
 
-const { tableData } = toRefs(props);
+const props = defineProps<IProps>();
+
+const { tableData, tableLimit, tablePage, tableTotal } = toRefs(props);
 
 const cleanData = computed(() => {
   return tableData.value?.map((e: IEmployee) => {
@@ -153,14 +160,12 @@ const tableTotals = reactive<ITotals>({
   total: 0,
 });
 
-const { tableLimit, tablePage, tableTotal } = globalState;
-
-tableTotals.from = tableLimit * tablePage - tableLimit + 1;
-tableTotals.to = Math.min(tableLimit * tablePage, tableTotal);
-tableTotals.total = tableTotal;
+tableTotals.from = tableLimit.value * tablePage.value - tableLimit.value + 1;
+tableTotals.to = Math.min(tableLimit.value * tablePage.value, tableTotal.value);
+tableTotals.total = tableTotal.value;
 
 const totalButtons = ref<(number | string)[]>();
-const totalPageCount = Math.ceil(tableTotal / tableLimit) || 0;
+const totalPageCount = Math.ceil(tableTotal.value / tableLimit.value) || 0;
 totalButtons.value = getPaginationRange(totalPageCount, globalState.tablePage);
 
 const changePage = (page: number | string) => {
