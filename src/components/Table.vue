@@ -81,12 +81,12 @@
           {{ tableTotals.total }} registros
         </p>
         <Select
-          @change="selectLimit"
-          :selected="globalState.tableLimit"
           iconChevronUp
           size="small"
           placeholder="Mostrar 10"
+          :selected="globalState.tableLimit"
           :options="optPagination"
+          @change="selectLimit"
         />
       </div>
     </div>
@@ -94,14 +94,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  withDefaults,
-  defineProps,
-  ref,
-  reactive,
-  toRefs,
-  computed,
-} from "vue";
+import { defineProps, ref, reactive, toRefs, computed } from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
 
 import ButtonActions from "../components/ButtonActions.vue";
@@ -114,7 +107,7 @@ const props = defineProps<{ tableData: IEmployee[] }>();
 const { tableData } = toRefs(props);
 
 const cleanData = computed(() => {
-  return tableData.value.map((e) => {
+  return tableData.value?.map((e: IEmployee) => {
     return {
       id: e.id,
       nombre: e.nombre,
