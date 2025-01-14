@@ -21,7 +21,7 @@ interface Props {
   onClick?: (payload: MouseEvent) => void;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   typeBtn: "default",
   icon: "plus",
 });
