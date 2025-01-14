@@ -6,10 +6,4 @@ export const getters = {
   user(state: IState) {
     return state?.dataAuth?.data?.user;
   },
-  employees(state: IState) {
-    return state?.dataEmployees?.data;
-  },
-  tableTotal(state: IState) {
-    return state?.dataEmployees?.total;
-  },
 };
