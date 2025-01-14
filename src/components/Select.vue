@@ -36,7 +36,6 @@ interface IOption {
 }
 
 interface Props {
-  modelValue: string;
   label?: string;
   size?: "large" | "medium" | "small";
   hasRequiredLabel?: boolean;
@@ -49,21 +48,14 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: "",
   placeholder: "Placeholder",
   size: "large",
   selected: "",
   hasEmptyValue: false,
 });
 
-const {
-  modelValue,
-  placeholder,
-  size,
-  selected,
-  iconChevronUp,
-  hasEmptyValue,
-} = toRefs(props);
+const { placeholder, size, selected, iconChevronUp, hasEmptyValue } =
+  toRefs(props);
 
 const localModel = ref<string | number>(selected.value);
 const emit = defineEmits(["change"]);
