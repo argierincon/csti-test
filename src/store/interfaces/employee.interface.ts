@@ -5,11 +5,11 @@ export interface IEmployeeList {
 }
 
 export interface IEmployee {
-  id:           number;
-  nombre:       string;
-  correo:       string;
-  cargo:        string;
-  departamento: string;
-  oficina:      string;
-  estadoCuenta: string;
+  id:            number;
+  name:          string;
+  email:         string;
+  role:          string;
+  department:    string;
+  office:        string;
+  accountStatus: string;
 }

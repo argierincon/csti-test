@@ -87,8 +87,8 @@ const getEmployeeData = async () => {
     data.value = globalState.dataEmployees.data;
     options.value = data.value
       ?.map((ele: IEmployee) => ({
-        label: ele.cargo,
-        value: ele.cargo,
+        label: ele.role,
+        value: ele.role,
       }))
       .concat(defaultOpt);
   } catch (error) {
@@ -128,8 +128,8 @@ const searchBox = ref<string>("");
 const onSearch = () => {
   data.value = globalState.dataEmployees.data.filter((ele: IEmployee) => {
     return (
-      RegExp(searchBox.value.toLowerCase()).test(ele.nombre.toLowerCase()) ||
-      RegExp(searchBox.value.toLowerCase()).test(ele.departamento.toLowerCase())
+      RegExp(searchBox.value.toLowerCase()).test(ele.name.toLowerCase()) ||
+      RegExp(searchBox.value.toLowerCase()).test(ele.department.toLowerCase())
     );
   });
 };
@@ -137,7 +137,7 @@ const onSearch = () => {
 const onSelect = (option: string) => {
   role.value = option;
   data.value = globalState.dataEmployees.data.filter((ele: IEmployee) => {
-    return RegExp(option.toLowerCase()).test(ele.cargo.toLowerCase());
+    return RegExp(option.toLowerCase()).test(ele.role.toLowerCase());
   });
 };
 

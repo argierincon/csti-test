@@ -27,7 +27,7 @@
               <div class="data-cell">
                 <p>{{ value }}</p>
                 <p v-if="name === 'nombre'" class="mini-label">
-                  {{ elem.correo }}
+                  {{ elem.email }}
                 </p>
               </div>
             </td>
@@ -163,12 +163,12 @@ const cleanData = computed(() => {
   return tableData.value?.map((e: IEmployee) => {
     return {
       id: e.id,
-      nombre: e.nombre,
-      correo: e.correo,
-      cargo: e.cargo,
-      departamento: e.departamento,
-      oficina: e.oficina,
-      cuenta: e.estadoCuenta,
+      nombre: e.name,
+      correo: e.email,
+      cargo: e.role,
+      departamento: e.department,
+      oficina: e.office,
+      cuenta: e.accountStatus,
     };
   });
 });
