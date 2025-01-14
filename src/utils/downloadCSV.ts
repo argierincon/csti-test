@@ -18,12 +18,12 @@ function convertToCSV(array: any[]) {
 
 const headers: IEmployee = {
   id: 0,
-  nombre: "Nombre",
-  correo: "Correo",
-  cargo: "Nombre cargo",
-  departamento: "Departamento",
-  oficina: "Oficina",
-  estadoCuenta: "Cuenta",
+  name: "Nombre",
+  email: "Correo",
+  role: "Nombre cargo",
+  department: "Departamento",
+  office: "Oficina",
+  accountStatus: "Cuenta",
 };
 
 export function exportCSVFile(items: IEmployee[]) {

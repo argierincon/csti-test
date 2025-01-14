@@ -62,7 +62,7 @@ td:not([align]) {
 }
 
 td[data-label="id"],
-td[data-label="correo"] {
+td[data-label="email"] {
   @apply !hidden;
 }
 

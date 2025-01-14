@@ -6,14 +6,16 @@ export async function mockLogin(
   email: string,
   password: string
 ): Promise<IAuth> {
-  console.log(email, password);
+  console.log({ email, password });
 
   return new Promise<IAuth>((resolve) => {
     setTimeout(() => resolve(user), 1500);
   });
 }
 
-export async function mockGetEmployees(params?: string): Promise<IEmployeeList> {
+export async function mockGetEmployees(
+  params?: string
+): Promise<IEmployeeList> {
   return new Promise<IEmployeeList>((resolve) => {
     setTimeout(() => {
       const urlParams = new URLSearchParams(params);

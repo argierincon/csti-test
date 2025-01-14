@@ -68,6 +68,7 @@ import Button from "../components/Button.vue";
 import { useRouter } from "vue-router";
 
 import { useGlobalStore } from "../store/index";
+import ErrorMsg from "../components/ErrorMsg.vue";
 
 const router = useRouter();
 const globalState = useGlobalStore();
@@ -86,7 +87,7 @@ const submit = async () => {
     isLoading.value = true;
 
     const payload = {
-      correo: email.value,
+      email: email.value,
       password: password.value,
     };
 

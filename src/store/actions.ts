@@ -4,7 +4,7 @@ import { IAuthPayload, IData } from "./interfaces/auth.interface";
 export const actions = {
   async login(payload: IAuthPayload) {
     try {
-      const data = await mockLogin(payload.correo, payload.password);
+      const data = await mockLogin(payload.email, payload.password);
 
       this.dataAuth = data;
     } catch (error) {
