@@ -36,7 +36,16 @@
       />
     </div>
     <TableSkeleton v-if="isLoading" />
-    <Table :tableData="data" v-else />
+    <Table
+      :tableData="data"
+      :limitPerPage="limitPerPage"
+      :currentPage="currentPage"
+      :tableTotal="globalState.dataEmployees.total"
+      :tableHeaders="tableHeaders"
+      @updateLimitPerPage="handleUpdateLimit"
+      @updateCurrentPage="handleUpdatePage"
+      v-else
+    />
   </section>
 </template>
 
@@ -53,37 +62,31 @@ import TableSkeleton from "../components/TableSkeleton.vue";
 import { useGlobalStore } from "../store/index";
 import { IEmployee } from "../store/interfaces/employee.interface";
 import { useRouter } from "vue-router";
-import { storeToRefs } from "pinia";
 import { exportCSVFile } from "../utils/downloadCSV";
-
-const data = ref<IEmployee[]>([]);
-
-const isLoading = ref<boolean>(false);
-const isLoadingData = ref<boolean>(false);
-const role = ref<string>("");
 
 const globalState = useGlobalStore();
 const router = useRouter();
 
-const logout = () => {
-  localStorage.removeItem("jwt");
-  localStorage.removeItem("user");
-  router.push("/login");
-};
+const data = ref<IEmployee[]>([]);
+
+const role = ref<string>("");
+const options = ref([]);
+const isLoading = ref<boolean>(true);
+const isLoadingData = ref<boolean>(false);
 
 const defaultOpt = [{ label: "Todos", value: ".*" }];
 
-const options = ref([]);
+const limitPerPage = ref<number>(10);
+const currentPage = ref<number>(1);
+
 const getEmployeeData = async () => {
   role.value = "";
   try {
     isLoading.value = true;
-
-    await globalState.getEmployees();
-    data.value = globalState?.employees;
-
-    options.value = globalState?.employees
-      ?.map((ele) => ({
+    await globalState.getEmployees(limitPerPage.value, currentPage.value);
+    data.value = globalState.dataEmployees.data;
+    options.value = data.value
+      ?.map((ele: IEmployee) => ({
         label: ele.cargo,
         value: ele.cargo,
       }))
@@ -96,21 +99,34 @@ const getEmployeeData = async () => {
   }
 };
 
-const { tablePage, tableLimit } = storeToRefs(globalState);
-watch(tableLimit, () => {
-  getEmployeeData();
-});
-watch(tablePage, () => {
+const tableHeaders = [
+  "Nombre",
+  "Nombre cargo",
+  "Departamento",
+  "Oficina",
+  "Cuenta",
+  "Acciones",
+];
+
+const handleUpdateLimit = (limit: number) => {
+  limitPerPage.value = limit;
+};
+
+const handleUpdatePage = (page: number) => {
+  currentPage.value = page;
+};
+
+watch(limitPerPage, () => {
   getEmployeeData();
 });
 
-onMounted(() => {
+watch(currentPage, () => {
   getEmployeeData();
 });
 
 const searchBox = ref<string>("");
 const onSearch = () => {
-  data.value = globalState?.employees?.filter((ele) => {
+  data.value = globalState.dataEmployees.data.filter((ele: IEmployee) => {
     return (
       RegExp(searchBox.value.toLowerCase()).test(ele.nombre.toLowerCase()) ||
       RegExp(searchBox.value.toLowerCase()).test(ele.departamento.toLowerCase())
@@ -120,21 +136,30 @@ const onSearch = () => {
 
 const onSelect = (option: string) => {
   role.value = option;
-  data.value = globalState?.employees?.filter((ele) => {
+  data.value = globalState.dataEmployees.data.filter((ele: IEmployee) => {
     return RegExp(option.toLowerCase()).test(ele.cargo.toLowerCase());
   });
 };
 
 const clearSearch = () => {
   searchBox.value = "";
-  data.value = globalState?.employees;
+  data.value = globalState.dataEmployees.data;
 };
 
 // Download data
-
 const downloadData = () => {
-  exportCSVFile(globalState?.employees)
+  exportCSVFile(data.value);
 };
+
+const logout = () => {
+  localStorage.removeItem("jwt");
+  localStorage.removeItem("user");
+  router.push("/login");
+};
+
+onMounted(() => {
+  getEmployeeData();
+});
 </script>
 
 <style lang="postcss" scoped>
