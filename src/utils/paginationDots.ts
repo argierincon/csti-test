@@ -18,10 +18,7 @@ export const getPaginationRange = (
 
   if (totalPageCount <= totalPageNumbers + 2) {
     const fullRange = range(1, totalPageCount);
-    return {
-      range: fullRange,
-      length: fullRange.length,
-    };
+    return fullRange;
   }
 
   const leftSiblingIndex = Math.max(currentPage - 1, 1);
@@ -41,10 +38,7 @@ export const getPaginationRange = (
   if (!shouldShowLeftDots && shouldShowRightDots) {
     const leftItemCount = 3;
     const leftRange = range(1, leftItemCount);
-    return {
-      range: [...leftRange, DOTS, totalPageCount],
-      length: leftRange.length + 1, // Sin contar los puntos suspensivos
-    };
+    return [...leftRange, DOTS, totalPageCount];
   }
 
   if (shouldShowLeftDots && !shouldShowRightDots) {
@@ -53,23 +47,15 @@ export const getPaginationRange = (
       totalPageCount - rightItemCount + 1,
       totalPageCount
     );
-    return {
-      range: [firstPageIndex, DOTS, ...rightRange],
-      length: rightRange.length + 1, // Without counting ellipses
-    };
+    return [firstPageIndex, DOTS, ...rightRange];
   }
 
   if (shouldShowLeftDots && shouldShowRightDots) {
     const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-    return {
-      range: [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex],
-      length: middleRange.length + 2, // Includes the first and last page
-    };
+    return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
   }
 
   const fullRange = range(firstPageIndex, lastPageIndex);
-  return {
-    range: fullRange,
-    length: fullRange.length,
-  };
+
+  return fullRange;
 };
