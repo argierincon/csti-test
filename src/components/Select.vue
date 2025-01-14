@@ -27,15 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  defineEmits,
-  defineProps,
-  computed,
-  ref,
-  watch,
-  withDefaults,
-  toRefs,
-} from "vue";
+import { defineProps, computed, ref, watch, withDefaults, toRefs } from "vue";
 import Icon from "../components/Icon.vue";
 
 interface IOption {
