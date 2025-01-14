@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { IIconProps } from "./interface";
-import { fillIcon, sizeIcon } from "../../utils/setIconStyles";
+import { fillIcon, sizeIcon } from "../../../utils/setIconStyles";
 
 const props = withDefaults(defineProps<IIconProps>(), {
   color: "black",

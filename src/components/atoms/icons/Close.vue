@@ -19,7 +19,7 @@
 import { withDefaults, defineProps } from "vue";
 
 import { IIconProps } from "./interface";
-import { fillIcon, sizeIcon } from "../../utils/setIconStyles";
+import { fillIcon, sizeIcon } from "../../../utils/setIconStyles";
 
 const props = withDefaults(defineProps<IIconProps>(), {
   color: "black",
