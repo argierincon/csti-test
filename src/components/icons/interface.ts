@@ -1,4 +1,9 @@
 export interface IIconProps {
-  color: "black" | "white" | "grey" | "red" | "green" | "blue";
-  size: "small" | "medium" | "large";
+  size?: string | number;
+  color?: string;
 }
+
+export const defaultIconProps: Required<IIconProps> = {
+  size: "1em",
+  color: "currentColor",
+};
