@@ -1,30 +1,29 @@
-import { http } from "../services/http";
-import { IAuth, IAuthPayload, IData } from "./interfaces/auth.interface";
-import { IEmpleados } from "./interfaces/employee.interface";
+import { mockGetEmployees, mockLogin } from "../services/apiMock";
+import { IAuthPayload, IData } from "./interfaces/auth.interface";
 
 export const actions = {
   async login(payload: IAuthPayload) {
-    const { data } = await http.post<IAuth>("/auth/login", payload);
-    http.defaults.headers.common.Authorization = `Token ${data.data.token}`;
-    this.dataAuth = data;
+    try {
+      const data = await mockLogin(payload.correo, payload.password);
+
+      this.dataAuth = data;
+
+      console.log("Login exitoso:", data);
+    } catch (error) {
+      console.error("Error en el login:", error);
+      throw new Error("No se pudo completar el login.");
+    }
   },
   async getEmployees() {
     const queryParams = `limit=${this.tableLimit}&page=${this.tablePage}`;
-    const { data } = await http.get<IEmpleados>("/empleados?" + queryParams);
-    this.dataEmployees = data;
+    try {
+      const data = await mockGetEmployees(queryParams);
+      this.dataEmployees = data;
+    } catch (error) {
+      console.error("Error al obtener los empleados", error);
+    }
   },
-
   setAuthData(data: IData) {
-    http.defaults.headers.common.Authorization = `Token ${data.token}`;
     this.dataAuth = { data };
-  },
-
-  setLimit(limit: number) {
-    this.tableLimit = limit;
-    this.tablePage = 1;
-  },
-
-  setPage(page: number) {
-    this.tablePage = page;
   },
 };
