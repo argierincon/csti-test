@@ -65,8 +65,6 @@ import CulqiLogo from "../components/CulqiLogo.vue";
 import Field from "../components/Field.vue";
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
-import Icon from "../components/Icon.vue";
-import ErrorMsg from "../components/ErrorMsg.vue";
 import { useRouter } from "vue-router";
 
 import { useGlobalStore } from "../store/index";
@@ -93,8 +91,12 @@ const submit = async () => {
     };
 
     await globalState.login(payload);
-    localStorage.setItem("jwt", globalState.token);
-    localStorage.setItem("user", JSON.stringify(globalState.user));
+
+    localStorage.setItem("jwt", globalState.dataAuth.data.token || "");
+    localStorage.setItem(
+      "user",
+      JSON.stringify(globalState.dataAuth.data.user || {})
+    );
 
     router.push("/employees");
   } catch (error) {
