@@ -43,8 +43,8 @@
       <div class="pagination-buttons">
         <ButtonActions
           icon="chevronLeft"
-          :disabled="tablePage === 1"
-          :onClick="() => changePage(tablePage - 1)"
+          :disabled="currentPage === 1"
+          :onClick="() => changePage(currentPage - 1)"
         />
 
         <nav class="page-navigation">
@@ -54,7 +54,7 @@
                 v-for="btn in arrRangeButtons"
                 :key="btn"
                 :class="{
-                  'btn-page--active': tablePage === btn,
+                  'btn-page--active': currentPage === btn,
                 }"
                 class="btn-page"
                 @click="changePage(btn)"
@@ -67,8 +67,8 @@
         </nav>
         <ButtonActions
           icon="chevronRight"
-          :disabled="tablePage === totalPageCount"
-          :onClick="() => changePage(tablePage + 1)"
+          :disabled="currentPage === totalPageCount"
+          :onClick="() => changePage(currentPage + 1)"
         />
       </div>
       <div class="responsive-table__totals">
@@ -80,7 +80,7 @@
           iconChevronUp
           size="small"
           placeholder="Mostrar 10"
-          :selected="tableLimit"
+          :selected="limitPerPage"
           :options="optPagination"
           @change="onChangeLimit"
         />
@@ -99,15 +99,15 @@ import Select from "../components/Select.vue";
 
 interface IProps {
   tableData: IEmployee[];
-  tableLimit: number;
-  tablePage: number;
+  limitPerPage: number;
+  currentPage: number;
   tableTotal: number;
   tableHeaders: string[];
 }
 
 const props = defineProps<IProps>();
 
-const { tableData, tableLimit, tablePage, tableTotal } = toRefs(props);
+const { tableData, limitPerPage, currentPage, tableTotal } = toRefs(props);
 
 const optPagination = [
   { label: "Mostrar 10", value: 10 },
@@ -129,24 +129,28 @@ const tableTotals = reactive<ITotals>({
   total: 0,
 });
 
-tableTotals.from = tableLimit.value * tablePage.value - tableLimit.value + 1;
-tableTotals.to = Math.min(tableLimit.value * tablePage.value, tableTotal.value);
+tableTotals.from =
+  limitPerPage.value * currentPage.value - limitPerPage.value + 1;
+tableTotals.to = Math.min(
+  limitPerPage.value * currentPage.value,
+  tableTotal.value
+);
 tableTotals.total = tableTotal.value;
 
 const arrRangeButtons = ref<(number | string)[]>();
-const totalPageCount = Math.ceil(tableTotal.value / tableLimit.value) || 0;
+const totalPageCount = Math.ceil(tableTotal.value / limitPerPage.value) || 0;
 
-arrRangeButtons.value = getPaginationRange(totalPageCount, tablePage.value);
+arrRangeButtons.value = getPaginationRange(totalPageCount, currentPage.value);
 
-const emit = defineEmits(["updateLimit", "updatePage"]);
+const emit = defineEmits(["updateLimitPerPage", "updateCurrentPage"]);
 
 const changePage = (page: number | string) => {
-  emit("updatePage", page);
+  emit("updateCurrentPage", page);
 };
 
 const onChangeLimit = (limit: number) => {
-  emit("updateLimit", limit);
-  emit("updatePage", 1);
+  emit("updateLimitPerPage", limit);
+  emit("updateCurrentPage", 1);
 };
 
 // !TODO: MAKE DYNAMIC
