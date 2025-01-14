@@ -17,16 +17,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="employee in cleanData" :key="employee.id">
-            <td
-              v-for="(value, name) in employee"
-              :key="name"
-              :data-label="name"
-            >
+          <tr v-for="elem in cleanData" :key="elem.id">
+            <td v-for="(value, name) in elem" :key="name" :data-label="name">
               <div class="data-cell">
                 <p>{{ value }}</p>
                 <p v-if="name === 'nombre'" class="mini-label">
-                  {{ employee.correo }}
+                  {{ elem.correo }}
                 </p>
               </div>
             </td>
@@ -55,7 +51,7 @@
           <ul class="button-numbers">
             <li>
               <button
-                v-for="btn in totalButtons"
+                v-for="btn in arrRangeButtons"
                 :key="btn"
                 :class="{
                   'btn-page--active': tablePage === btn,
@@ -71,7 +67,7 @@
         </nav>
         <ButtonActions
           icon="chevronRight"
-          :disabled="tablePage === totalButtons.length - 1"
+          :disabled="tablePage === pagButtonsLength"
           :onClick="() => changePage(tablePage + 1)"
         />
       </div>
@@ -84,9 +80,9 @@
           iconChevronUp
           size="small"
           placeholder="Mostrar 10"
-          :selected="globalState.tableLimit"
+          :selected="tableLimit"
           :options="optPagination"
-          @change="selectLimit"
+          @change="onChangeLimit"
         />
       </div>
     </div>
@@ -96,47 +92,24 @@
 <script setup lang="ts">
 import { defineProps, ref, reactive, toRefs, computed } from "vue";
 import { IEmployee } from "../store/interfaces/employee.interface";
+import { getPaginationRange } from "../utils/paginationDots";
 
 import ButtonActions from "../components/ButtonActions.vue";
 import Select from "../components/Select.vue";
-import { useGlobalStore } from "../store";
-import { getPaginationRange } from "../utils/paginationDots";
 
 interface IProps {
   tableData: IEmployee[];
   tableLimit: number;
   tablePage: number;
   tableTotal: number;
+  tableHeaders: string[];
 }
 
 const props = defineProps<IProps>();
 
 const { tableData, tableLimit, tablePage, tableTotal } = toRefs(props);
 
-const cleanData = computed(() => {
-  return tableData.value?.map((e: IEmployee) => {
-    return {
-      id: e.id,
-      nombre: e.nombre,
-      correo: e.correo,
-      cargo: e.cargo,
-      departamento: e.departamento,
-      oficina: e.oficina,
-      cuenta: e.estadoCuenta,
-    };
-  });
-});
-
-const tableHeaders = [
-  "Nombre",
-  "Nombre cargo",
-  "Departamento",
-  "Oficina",
-  "Cuenta",
-  "Acciones",
-];
-
-const globalState = useGlobalStore();
+// HACER DINAMICO
 const optPagination = [
   { label: "Mostrar 10", value: 10 },
   { label: "Mostrar 20", value: 20 },
@@ -144,9 +117,6 @@ const optPagination = [
   { label: "Mostrar 40", value: 40 },
   { label: "Mostrar 50", value: 50 },
 ];
-const selectLimit = (limit: number) => {
-  globalState.setLimit(limit);
-};
 
 interface ITotals {
   from: number;
@@ -164,16 +134,47 @@ tableTotals.from = tableLimit.value * tablePage.value - tableLimit.value + 1;
 tableTotals.to = Math.min(tableLimit.value * tablePage.value, tableTotal.value);
 tableTotals.total = tableTotal.value;
 
-const totalButtons = ref<(number | string)[]>();
+const arrRangeButtons = ref<(number | string)[]>();
+const pagButtonsLength = ref<number>();
 const totalPageCount = Math.ceil(tableTotal.value / tableLimit.value) || 0;
-totalButtons.value = getPaginationRange(totalPageCount, globalState.tablePage);
+
+arrRangeButtons.value = getPaginationRange(
+  totalPageCount,
+  tablePage.value
+).range;
+
+pagButtonsLength.value = getPaginationRange(
+  totalPageCount,
+  tablePage.value
+).length;
+
+const emit = defineEmits(["updateLimit", "updatePage"]);
 
 const changePage = (page: number | string) => {
-  if (typeof page === "string") {
-    return;
-  }
-  globalState.setPage(page);
+  emit("updatePage", page);
 };
+
+const onChangeLimit = (limit: number) => {
+  emit("updateLimit", limit);
+  emit("updatePage", 1);
+};
+
+// !TODO: MAKE DYNAMIC
+const cleanData = computed(() => {
+  console.log(tableData.value);
+
+  return tableData.value?.map((e: IEmployee) => {
+    return {
+      id: e.id,
+      nombre: e.nombre,
+      correo: e.correo,
+      cargo: e.cargo,
+      departamento: e.departamento,
+      oficina: e.oficina,
+      cuenta: e.estadoCuenta,
+    };
+  });
+});
 </script>
 
 <style lang="postcss" scoped>
