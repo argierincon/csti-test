@@ -8,6 +8,7 @@
       <input
         v-bind="$attrs"
         v-model="localModel"
+        autocomplete="off"
         :type="type"
         :placeholder="placeholder"
         :required="required"
