@@ -4,5 +4,10 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-const props = defineProps<{ name: string }>();
+
+interface IProps {
+  name: string;
+}
+
+defineProps<IProps>();
 </script>
