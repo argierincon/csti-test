@@ -109,7 +109,6 @@ const props = defineProps<IProps>();
 
 const { tableData, tableLimit, tablePage, tableTotal } = toRefs(props);
 
-// HACER DINAMICO
 const optPagination = [
   { label: "Mostrar 10", value: 10 },
   { label: "Mostrar 20", value: 20 },
