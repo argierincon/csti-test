@@ -55,7 +55,7 @@ export const getPaginationRange = (
     );
     return {
       range: [firstPageIndex, DOTS, ...rightRange],
-      length: rightRange.length + 1, // Sin contar los puntos suspensivos
+      length: rightRange.length + 1, // Without counting ellipses
     };
   }
 
@@ -63,7 +63,7 @@ export const getPaginationRange = (
     const middleRange = range(leftSiblingIndex, rightSiblingIndex);
     return {
       range: [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex],
-      length: middleRange.length + 2, // Incluye la primera y última página
+      length: middleRange.length + 2, // Includes the first and last page
     };
   }
 
