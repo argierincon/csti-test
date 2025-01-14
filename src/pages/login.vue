@@ -43,8 +43,8 @@
         <p class="register">
           ¿Eres nuevo aquí?
           <a
+            disabled
             class="text-primary-500"
-            href="https://culqi.com/register/"
             target="_blank"
             rel="noopener noreferrer"
             >Crea una cuenta</a
