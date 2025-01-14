@@ -161,8 +161,6 @@ const onChangeLimit = (limit: number) => {
 
 // !TODO: MAKE DYNAMIC
 const cleanData = computed(() => {
-  console.log(tableData.value);
-
   return tableData.value?.map((e: IEmployee) => {
     return {
       id: e.id,
