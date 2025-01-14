@@ -1,4 +1,4 @@
-export interface IEmpleados {
+export interface IEmployeeList {
   status: string;
   data:   IEmployee[];
   total:  number;

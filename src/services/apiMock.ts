@@ -1,5 +1,5 @@
 import { IAuth } from "../store/interfaces/auth.interface";
-import { IEmpleados } from "../store/interfaces/employee.interface";
+import { IEmployeeList } from "../store/interfaces/employee.interface";
 import { employees, user } from "./mocks";
 
 export async function mockLogin(
@@ -13,8 +13,8 @@ export async function mockLogin(
   });
 }
 
-export async function mockGetEmployees(params?: string): Promise<IEmpleados> {
-  return new Promise<IEmpleados>((resolve) => {
+export async function mockGetEmployees(params?: string): Promise<IEmployeeList> {
+  return new Promise<IEmployeeList>((resolve) => {
     setTimeout(() => {
       const urlParams = new URLSearchParams(params);
       const limit = parseInt(urlParams.get("limit") || "10", 10);

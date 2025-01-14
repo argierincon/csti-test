@@ -1,5 +1,5 @@
 import { IAuth } from "../store/interfaces/auth.interface";
-import { IEmpleados } from "../store/interfaces/employee.interface";
+import { IEmployeeList } from "../store/interfaces/employee.interface";
 
 export const user: IAuth = {
   data: {
@@ -17,7 +17,7 @@ export const user: IAuth = {
   status: "success",
 };
 
-export const employees: IEmpleados = {
+export const employees: IEmployeeList = {
   status: "success",
   data: [
     {
