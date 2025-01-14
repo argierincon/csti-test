@@ -61,14 +61,14 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import CulqiLogo from "../components/CulqiLogo.vue";
-import Field from "../components/Field.vue";
-import Input from "../components/Input.vue";
-import Button from "../components/Button.vue";
+import CulqiLogo from "../components/atoms/CulqiLogo.vue";
+import Field from "../components/atoms/Field.vue";
+import Input from "../components/molecules/Input.vue";
+import Button from "../components/molecules/Button.vue";
 import { useRouter } from "vue-router";
 
 import { useGlobalStore } from "../store/index";
-import ErrorMsg from "../components/ErrorMsg.vue";
+import ErrorMsg from "../components/molecules/ErrorMsg.vue";
 
 const router = useRouter();
 const globalState = useGlobalStore();

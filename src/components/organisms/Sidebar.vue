@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import CulqiLogo from "../components/CulqiLogo.vue";
-import Button from "./Button.vue";
-import Icon from "../components/Icon.vue";
+import CulqiLogo from "../atoms/CulqiLogo.vue";
+import Button from "../molecules/Button.vue";
+import Icon from "../atoms/Icon.vue";
 
 const router = useRouter();
 

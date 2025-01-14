@@ -28,8 +28,8 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, computed } from "vue";
 
-import Spinner from "./Spinner.vue";
-import Icon from "./Icon.vue";
+import Spinner from "../atoms/Spinner.vue";
+import Icon from "../atoms/Icon.vue";
 
 interface Props {
   type?: "button" | "reset" | "submit";

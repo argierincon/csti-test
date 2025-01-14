@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { defineProps, withDefaults } from "vue";
-import Icon from "./Icon.vue";
+import Icon from "../atoms/Icon.vue";
 
 interface Props {
   typeBtn?: "default" | "success" | "info" | "error";

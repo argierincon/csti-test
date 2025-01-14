@@ -43,8 +43,8 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, watch, toRefs } from "vue";
-import Icon from "../components/Icon.vue";
-import Spinner from "../components/Spinner.vue";
+import Icon from "../atoms/Icon.vue";
+import Spinner from "../atoms/Spinner.vue";
 
 interface Props {
   modelValue: string;

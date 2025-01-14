@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { IEmployee } from "../store/interfaces/employee.interface";
-import Skeleton from "../components/Skeleton.vue";
+import { IEmployee } from "../../store/interfaces/employee.interface";
+import Skeleton from "../atoms/Skeleton.vue";
 </script>
 
 <style lang="postcss" scoped>

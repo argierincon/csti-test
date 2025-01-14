@@ -96,11 +96,11 @@
 
 <script setup lang="ts">
 import { defineProps, ref, reactive, toRefs, computed } from "vue";
-import { IEmployee } from "../store/interfaces/employee.interface";
-import { getPaginationRange } from "../utils/paginationDots";
+import { IEmployee } from "../../store/interfaces/employee.interface";
+import { getPaginationRange } from "../../utils/paginationDots";
 
-import ButtonActions from "../components/ButtonActions.vue";
-import Select from "../components/Select.vue";
+import ButtonActions from "../molecules/ButtonActions.vue";
+import Select from "../atoms/Select.vue";
 
 interface IProps {
   tableData: IEmployee[];

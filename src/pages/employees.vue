@@ -52,12 +52,12 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 
-import Button from "../components/Button.vue";
-import Input from "../components/Input.vue";
-import Table from "../components/Table.vue";
-import Select from "../components/Select.vue";
-import Skeleton from "../components/Skeleton.vue";
-import TableSkeleton from "../components/TableSkeleton.vue";
+import Button from "../components/molecules/Button.vue";
+import Input from "../components/molecules/Input.vue";
+import Table from "../components/organisms/Table.vue";
+import Select from "../components/atoms/Select.vue";
+import Skeleton from "../components/atoms/Skeleton.vue";
+import TableSkeleton from "../components/molecules/TableSkeleton.vue";
 
 import { useGlobalStore } from "../store/index";
 import { IEmployee } from "../store/interfaces/employee.interface";

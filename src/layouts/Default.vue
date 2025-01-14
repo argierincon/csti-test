@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import Sidebar from "../components/Sidebar.vue";
-import Avatar from "../components/Avatar.vue";
+import Sidebar from "../components/organisms/Sidebar.vue";
+import Avatar from "../components/atoms/Avatar.vue";
 import { useGlobalStore } from "../store/index";
 
 const globalStore = useGlobalStore();

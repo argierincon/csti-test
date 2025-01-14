@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import Icon from "../components/Icon.vue";
+import Icon from "../components/atoms/Icon.vue";
 </script>
 
 <style lang="postcss" scoped>
