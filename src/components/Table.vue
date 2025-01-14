@@ -67,7 +67,7 @@
         </nav>
         <ButtonActions
           icon="chevronRight"
-          :disabled="tablePage === pagButtonsLength"
+          :disabled="tablePage === totalPageCount"
           :onClick="() => changePage(tablePage + 1)"
         />
       </div>
@@ -135,18 +135,9 @@ tableTotals.to = Math.min(tableLimit.value * tablePage.value, tableTotal.value);
 tableTotals.total = tableTotal.value;
 
 const arrRangeButtons = ref<(number | string)[]>();
-const pagButtonsLength = ref<number>();
 const totalPageCount = Math.ceil(tableTotal.value / tableLimit.value) || 0;
 
-arrRangeButtons.value = getPaginationRange(
-  totalPageCount,
-  tablePage.value
-).range;
-
-pagButtonsLength.value = getPaginationRange(
-  totalPageCount,
-  tablePage.value
-).length;
+arrRangeButtons.value = getPaginationRange(totalPageCount, tablePage.value);
 
 const emit = defineEmits(["updateLimit", "updatePage"]);
 
