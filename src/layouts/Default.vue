@@ -1,7 +1,7 @@
 <template>
   <div class="container-view">
     <nav class="nav">
-      <Avatar :userName="user?.nombre" />
+      <Avatar :userName="user.nombre" />
     </nav>
     <aside class="sidebar">
       <Sidebar />
