@@ -1,9 +1,9 @@
 export interface IIconProps {
-  size?: string | number;
-  color?: string;
+  color?: "black" | "white" | "grey" | "red" | "green" | "blue";
+  size?: "small" | "medium" | "large";
 }
 
 export const defaultIconProps: Required<IIconProps> = {
-  size: "1em",
-  color: "currentColor",
+  size: "medium",
+  color: "white",
 };
