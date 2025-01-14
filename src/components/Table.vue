@@ -26,7 +26,7 @@
             <td v-for="(value, name) in elem" :key="name" :data-label="name">
               <div class="data-cell">
                 <p>{{ value }}</p>
-                <p v-if="name === 'nombre'" class="mini-label">
+                <p v-if="name === 'name'" class="mini-label">
                   {{ elem.email }}
                 </p>
               </div>
@@ -163,12 +163,12 @@ const cleanData = computed(() => {
   return tableData.value?.map((e: IEmployee) => {
     return {
       id: e.id,
-      nombre: e.name,
-      correo: e.email,
-      cargo: e.role,
-      departamento: e.department,
-      oficina: e.office,
-      cuenta: e.accountStatus,
+      name: e.name,
+      email: e.email,
+      role: e.role,
+      department: e.department,
+      office: e.office,
+      accountStatus: e.accountStatus,
     };
   });
 });
