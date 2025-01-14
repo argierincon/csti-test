@@ -17,6 +17,11 @@
           </tr>
         </thead>
         <tbody>
+          <tr v-if="cleanData.length === 0">
+            <td colspan="100%" class="text-center">
+              <div class="td-empty">No hay registros</div>
+            </td>
+          </tr>
           <tr v-for="elem in cleanData" :key="elem.id">
             <td v-for="(value, name) in elem" :key="name" :data-label="name">
               <div class="data-cell">
@@ -205,6 +210,11 @@ td:not([align]) {
 td[data-label="id"],
 td[data-label="correo"] {
   @apply !hidden;
+}
+
+.td-empty {
+  @apply flex justify-center text-sm;
+  @apply md:text-base;
 }
 
 .table-wrapper {
