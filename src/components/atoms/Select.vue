@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { defineProps, computed, ref, watch, withDefaults, toRefs } from "vue";
-import Icon from "../components/Icon.vue";
+import Icon from "../atoms/Icon.vue";
 
 interface IOption {
   label: string;
