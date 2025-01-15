@@ -166,7 +166,7 @@ const optPagination = [
 
 const nameMapping = {
   name: "Nombre",
-  id: "ID",
+  id: "id",
   email: "Correo",
   role: "Cargo",
   department: "Departamento",
