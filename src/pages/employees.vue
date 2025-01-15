@@ -101,7 +101,8 @@ const getEmployeeData = async () => {
 
 const tableHeaders = [
   "Nombre",
-  "Nombre cargo",
+  "Correo",
+  "Cargo",
   "Departamento",
   "Oficina",
   "Cuenta",

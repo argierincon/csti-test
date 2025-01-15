@@ -23,7 +23,11 @@
             </td>
           </tr>
           <tr v-for="elem in cleanData" :key="elem.id">
-            <td v-for="(value, name) in elem" :key="name" :data-label="name">
+            <td
+              v-for="(value, name) in elem"
+              :key="name"
+              :data-label="getTranslatedLabel(name)"
+            >
               <div class="data-cell">
                 <p>{{ value }}</p>
                 <p v-if="name === 'name'" class="mini-label">
@@ -49,7 +53,7 @@
         <ButtonActions
           icon="chevronLeft"
           :disabled="currentPage === 1"
-          :onClick="() => changePage(currentPage - 1)"
+          :onClick="() => onChangePage(currentPage - 1)"
         />
 
         <nav class="page-navigation">
@@ -62,7 +66,7 @@
                   'btn-page--active': currentPage === btn,
                 }"
                 class="btn-page"
-                @click="changePage(btn)"
+                @click="onChangePage(btn)"
                 :disabled="typeof btn === 'string'"
               >
                 {{ btn }}
@@ -73,7 +77,7 @@
         <ButtonActions
           icon="chevronRight"
           :disabled="currentPage === totalPageCount"
-          :onClick="() => changePage(currentPage + 1)"
+          :onClick="() => onChangePage(currentPage + 1)"
         />
       </div>
       <div class="responsive-table__totals">
@@ -114,14 +118,6 @@ const props = defineProps<IProps>();
 
 const { tableData, limitPerPage, currentPage, tableTotal } = toRefs(props);
 
-const optPagination = [
-  { label: "Mostrar 10", value: 10 },
-  { label: "Mostrar 20", value: 20 },
-  { label: "Mostrar 30", value: 30 },
-  { label: "Mostrar 40", value: 40 },
-  { label: "Mostrar 50", value: 50 },
-];
-
 interface ITotals {
   from: number;
   to: number;
@@ -147,15 +143,38 @@ const totalPageCount = Math.ceil(tableTotal.value / limitPerPage.value) || 0;
 
 arrRangeButtons.value = getPaginationRange(totalPageCount, currentPage.value);
 
+// EVENTS
 const emit = defineEmits(["updateLimitPerPage", "updateCurrentPage"]);
 
-const changePage = (page: number | string) => {
+const onChangePage = (page: number | string) => {
   emit("updateCurrentPage", page);
 };
 
 const onChangeLimit = (limit: number) => {
   emit("updateLimitPerPage", limit);
   emit("updateCurrentPage", 1);
+};
+
+// CONSTS
+const optPagination = [
+  { label: "Mostrar 10", value: 10 },
+  { label: "Mostrar 20", value: 20 },
+  { label: "Mostrar 30", value: 30 },
+  { label: "Mostrar 40", value: 40 },
+  { label: "Mostrar 50", value: 50 },
+];
+
+const nameMapping = {
+  name: "Nombre",
+  email: "Correo",
+  role: "Cargo",
+  department: "Departamento",
+  office: "Oficina",
+  accountStatus: "Estado",
+} as const;
+
+const getTranslatedLabel = (name: keyof typeof nameMapping): string => {
+  return nameMapping[name] || name;
 };
 
 // !TODO: MAKE DYNAMIC
