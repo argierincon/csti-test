@@ -1,5 +1,5 @@
 <template>
-  <div class="container-view">
+  <div class="layout">
     <nav class="nav">
       <Avatar :userName="user.name" />
     </nav>
@@ -35,7 +35,7 @@ if (!user && !token) {
 </script>
 
 <style lang="postcss" scoped>
-.container-view {
+.layout {
   @apply h-[100vh];
   @apply md:grid md:grid-rows-[96px_1fr] md:grid-cols-[220px_1fr];
   @apply lg:grid-cols-[280px_1fr];
