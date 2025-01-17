@@ -1,6 +1,6 @@
 <template>
   <section class="sidebar-component">
-    <CulqiLogo fill="black" class="mx-auto" />
+    <TeamnetLogo />
     <ul class="options-list">
       <router-link v-for="item in sidebarItem" :key="item.label" :to="item.url">
         <li class="sidebar__item">
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import CulqiLogo from "../atoms/CulqiLogo.vue";
+import TeamnetLogo from "../atoms/TeamnetLogo.vue";
 import Button from "../molecules/Button.vue";
 import Icon from "../atoms/Icon.vue";
 
@@ -50,7 +50,7 @@ const activePage = (item: IItem) => {
 
 <style lang="postcss" scoped>
 .sidebar-component {
-  @apply h-full py-6 px-8 grid gap-6 grid-rows-[40px_1fr_48px];
+  @apply h-full py-6 px-8 grid gap-6 grid-rows-[80px_1fr_48px];
   @apply border-r border-greyscale-300;
 }
 
