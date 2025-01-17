@@ -123,7 +123,7 @@ const submit = async () => {
 }
 
 .banner__img {
-  background-image: url("../assets/images/banner-login.png");
+  background-image: url("../assets/images/banner-login.jpeg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
