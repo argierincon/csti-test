@@ -195,6 +195,10 @@ const cleanData = computed(() => {
 </script>
 
 <style lang="postcss" scoped>
+.responsive-table {
+  @apply lg:h-[calc(100%_-_170px)];
+}
+
 .table {
   @apply w-full border-spacing-0 text-sm;
 
@@ -239,6 +243,7 @@ td[data-label="correo"] {
 
 .table-wrapper {
   @apply overflow-x-auto;
+  @apply lg:h-[calc(100%_-_55px)];
 }
 
 .mini-label {

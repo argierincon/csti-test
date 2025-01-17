@@ -78,7 +78,7 @@
 }
 
 .main-sections {
-  @apply p-6 min-h-[50%] max-h-full rounded-2xl bg-white overflow-y-auto;
+  @apply p-6 min-h-[50%] h-full rounded-2xl bg-white overflow-y-auto;
 }
 
 .title {
