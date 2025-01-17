@@ -1,6 +1,6 @@
 <template>
   <section class="sidebar-component">
-    <TeamnetLogo />
+    <TeamnetLogo class="logo" />
     <ul class="options-list">
       <router-link v-for="item in sidebarItem" :key="item.label" :to="item.url">
         <li class="sidebar__item">
@@ -60,5 +60,9 @@ const activePage = (item: IItem) => {
 
 .router-link-active .sidebar__item {
   @apply text-primary-300;
+}
+
+.logo {
+  @apply self-center mx-auto;
 }
 </style>
