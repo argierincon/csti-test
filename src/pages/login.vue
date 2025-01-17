@@ -3,7 +3,7 @@
     <div class="login__banner">
       <div class="banner__img"></div>
       <div class="banner__content">
-        <CulqiLogo />
+        <TeamnetLogo />
         <h1>Dale más power ⚡ a tus empleados hoy 💪</h1>
         <p>Te ayudamos a gestionarlos de manera más sencilla</p>
       </div>
@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import CulqiLogo from "../components/atoms/CulqiLogo.vue";
+import TeamnetLogo from "../components/atoms/TeamnetLogo.vue";
 import Field from "../components/atoms/Field.vue";
 import Input from "../components/molecules/Input.vue";
 import Button from "../components/molecules/Button.vue";
